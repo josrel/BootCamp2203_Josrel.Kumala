@@ -5,6 +5,10 @@ const rl = readline.createInterface({
     output : process.stdout
 });
 rl.question('masukan nama : ', function(nama){
-    console.log(`Halo ${nama}`);
-    rl.close();
+    rl.question('masukan no HP : ', function(noHP){
+        rl.question('masukan email : ', function(email){
+            console.log(`Halo ${nama}, no HP anda ${noHP}, email anda ${email}`);
+            rl.close();
+        })
+    })
 });
