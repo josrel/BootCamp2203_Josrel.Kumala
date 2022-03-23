@@ -22,19 +22,22 @@ const rl = readline.createInterface({
 //cara 1
 rl.question('nama anda : ',(nama) =>{
     rl.question('nomor hp : ', (noHP) => {
-        rl.question('email : ', (email) => {
-            console.log(`nama anda ${nama}`)
-            if(validator.isMobilePhone(noHP) == true){
-                console.log(`nomor HP ${noHP}`)
+        if(validator.isMobilePhone(noHP) == true){
+            rl.question('email : ', (email) => {     
+                if(validator.isEmail(email) == true){
+                    console.log(`nama anda ${nama}`)
+                    console.log(`nomor HP ${noHP}`)
+                    console.log(`email ${email}`)
+                    rl.close()
+                }else{
+                    console.log('email anda salah')
+                    rl.close()
+                }
+            })
             }else{
                 console.log('no hp anda salah')
+                
+                
             }
-            if(validator.isEmail(email) == true){
-                console.log(`email ${email}`)
-            }else{
-                console.log('email anda salah')
-            }
-            rl.close()
-        })
     })
 })
