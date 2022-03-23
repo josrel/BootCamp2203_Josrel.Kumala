@@ -20,8 +20,13 @@ const rl = readline.createInterface({
 const pertanyaan1 = () => {
     return new Promise ((resolve, rejects)=> {
         rl.question('1 + 1 = ', (jawaban) => {
-            console.log(`jawabannya adalah : ${jawaban}`)
-            resolve();
+            if(jawaban != 2){
+                console.log('jawaban salah')
+                pertanyaan1()
+            }else{
+                console.log(`jawabannya adalah : ${jawaban}`)
+                resolve();
+            }
         } )
     })
 }
@@ -44,7 +49,6 @@ const pertanyaan3 = () => {
 const main = async () => {
     await pertanyaan1()
     await pertanyaan2()
-    await pertanyaan3()
     rl.close()
 }
 main()
