@@ -2,6 +2,7 @@ const validator = require('validator')
 const readline = require('readline')
 const { rejects } = require('assert');
 const { resolve } = require('path');
+const Promise = require('promise')
 const fs = require('fs')
 
 const rl = readline.createInterface({
@@ -43,25 +44,31 @@ const rl = readline.createInterface({
 // })
 
 //cara looping
+
+var name = '';
+var telpon = '';
+var alamatemail = '';
 const pertanyaanNama = () => {
-    return new Promise ((resolve, rejects)=> {
+    return new Promise (function(resolve, rejects) {
         rl.question('Nama :', (nama) => {
-            console.log(`nama anda : ${nama}`)
-            resolve();
-        } )
+            name = nama
+            resolve(nama)
+            
+        })
     })
 }
 const pertanyaanNomorHP = () => {
     return new Promise ((resolve, rejects)=> {
         rl.question('Nomor HP :', (nomor) => {
             if(validator.isMobilePhone(nomor) == false){
-                console.log(`${nomor} bukan nomor telepon coba lagi`)
+                console.log(`${nomor} bukan nomor telepon yang benar, coba lagi`)
                 pertanyaanNomorHP()
             }else{
-                console.log(`nomor anda : ${nomor}`)
-                resolve();
+                telpon = nomor;
+                pertanyaanEmail()
+                resolve()
             }
-        } )
+        })
     })
 }
 
@@ -72,13 +79,16 @@ const pertanyaanEmail = () => {
                 console.log(`${email} bukan email yang benar, coba lagi.`)
                 pertanyaanEmail()
             }else{
-                console.log(`email anda : ${email}`)
+                alamatemail = email
+                console.log(`nama anda : ${name}, nomor telepon anda : ${telpon}, alamat email anda : ${alamatemail}. terima kasih sudah memasukan data.`)
                 resolve();
                 rl.close()
             }
         })
     })
 }
+
+  
 
 const main = async () => {
     await pertanyaanNama()
