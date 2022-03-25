@@ -36,6 +36,7 @@ if(!fs.existsSync(cekfile)){
 //     })
 // }
 
+//file sama kontak di pindahin ke fungsi baru supaya gampang di panggil di fungsi mana aja
 const semuaContact = () => {
     //baca dulu isi filenya jsonnya
     const file = fs.readFileSync('data/contacts.json','utf-8')
@@ -48,9 +49,12 @@ const semuaContact = () => {
 const savecontact = (nama,nomor,email) => {
     //bikin variable jadi object
     const kontak = {nama,nomor,email}
-
+    //contohnya ini manggil fungsi semua kontak
     const contacts = semuaContact()
-
+    //variable ini di buat buat kalo nama ada yang sama dicari satu persatu pake find
+    //abis itu di cocokin sama nama yang diambil dari input
+    //kalo ada bakal keluar tulisan nama udah terdaftar
+    //lalu return false supaya programnya berenti
     const duplikat = contacts.find((kontak) => kontak.nama === nama)
     if(duplikat){
         console.log(`${nama} sudah terdaftar`)
@@ -58,6 +62,7 @@ const savecontact = (nama,nomor,email) => {
     }   
     //sama kaya duplikat trus validator kaya biasa
     //jangan lupa return false nanti yang ga berhasil juga ikut ke print
+    //jangan lupa pake id-ID.. 
     if(!validator.isMobilePhone(nomor,'id-ID')){
         console.log(`${nomor} <= nomor tersebut tidak valid`)
         return false
@@ -82,6 +87,8 @@ const savecontact = (nama,nomor,email) => {
     // rl.close()
 
 }
+//fungsi list kontak buat nampilin semua data yang ada di file jsonnya
+//fungsi for each buat ngeprint terus sampe hasil di jsonnya habis
 
 const listKontak = () =>{
         
@@ -115,18 +122,25 @@ const detailKontak = (nama) => {
         console.log(kontak.email)
     }
 }
-
+//fungsi delete kontak
 const deleteKontak = (nama) => {
-
+    //panggil funsi list buat jsonnya
     const contacts = semuaContact()
-
+    //bikin var baru buat nampung isi array yang baru
+    //pake fungsi filter buat nyaring kontak yang mau di hapus
+    //bandingin nama yang di input sama nama yang di json
     const listBaru = contacts.filter((kontak) => kontak.nama !== nama)
 
+    //cara bedain nama yang ada sama yang ga ada
+    //bandingin panjang array lama (contact) sama panjang arrray baru (listbaru)
+    //kalo misalnya panjangnya sama brati namanya ga ketemu trus di return false
     if(contacts.length === listBaru.length){
         console.log(`${nama} tidak ditemukan`)
         return false
     }
+    
 
+    //abis itu masukin file array baru ke jsonnya lagi
     fs.writeFileSync('data/contacts.json',JSON.stringify(listBaru))
     console.log(`data ${nama} berhasil dihapus !`)
 
