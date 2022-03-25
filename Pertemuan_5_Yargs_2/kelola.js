@@ -116,10 +116,28 @@ const detailKontak = (nama) => {
     }
 }
 
+const deleteKontak = (nama) => {
+
+    const contacts = semuaContact()
+
+    const listBaru = contacts.filter((kontak) => kontak.nama !== nama)
+
+    if(contacts.length === listBaru.length){
+        console.log(`${nama} tidak ditemukan`)
+        return false
+    }
+
+    fs.writeFileSync('data/contacts.json',JSON.stringify(listBaru))
+    console.log(`data ${nama} berhasil dihapus !`)
+
+
+}
+
 module.exports = {
     //fungsinya matiin juga
     // pertanyaan,
     savecontact,
     listKontak,
     detailKontak,
+    deleteKontak,
 }

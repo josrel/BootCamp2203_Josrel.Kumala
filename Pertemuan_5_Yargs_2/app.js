@@ -50,4 +50,19 @@ yargs.command({
         }
 })
 
+yargs.command({
+    command: 'delete',
+        describe: 'menghapus list nama',
+        builder: {
+            nama:{
+                describe:'masukan nama',
+                demandOption:true,
+                type:'string',
+            }
+        },
+        handler(argv){
+            kontak.deleteKontak(argv.nama)
+        }
+})
+
 yargs.parse()
