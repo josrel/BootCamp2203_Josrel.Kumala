@@ -15,23 +15,18 @@ app.get('/about',(req,res) =>{
 app.get('/contact',(req,res) =>{
     res.sendFile('contact.html',{root: __dirname})
 })
-app.get('/product/:id',(req,res) =>{
-    res.send(`product id : ${req.params.id}`)
-})
-app.get('/product/:id/category',(req,res) =>{
-    res.send(`product id : ${req.params.id}<br>name : ${req.params.category}`)
-})
+// app.get('/product/:id',(req,res) =>{
+//     res.send(`product id : ${req.params.id}`)
+// })
+// app.get('/product/:id/category',(req,res) =>{
+//     res.send(`product id : ${req.params.id}<br>name : ${req.params.category}`)
+// })
 // app.get('/product/:name', (req, res) => {
 //     res.send(`product id : ${req.params.id} <br> with name : ${req.query.name}`)
 // })
 
-app.get('/sample/:id', function(req, res) {
-
-    var id = req.params.id;
-    var id2 = req.query.id; 
-   console.log(id)
-   console.log(id2)
-   res.send(`product id : ${id} <br> category ${id2}`)
+app.get('/product/:id', function(req, res) {
+   res.send(`product id : ${req.params.id} <br> category ${req.query.id}`)
    });
 app.use('/',(req,res) =>{
     res.status(404)
