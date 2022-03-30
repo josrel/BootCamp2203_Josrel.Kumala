@@ -18,11 +18,13 @@ app.get('/index',(req,res) =>{
 })
 app.get('/about',(req,res) =>{    
     res.render('about',{
-        nama: 'josrel'
+        tulisan: 'halo view engine about josrel'
     })
 })
 app.get('/contact',(req,res) =>{
-    res.render('contact')
+    res.render('contact',{
+        tulisan: 'halo view engine contact josrel'
+    })
 })
 // app.get('/product/:id',(req,res) =>{
 //     res.send(`product id : ${req.params.id}`)
