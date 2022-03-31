@@ -25,7 +25,7 @@ app.get('/',(req,res) =>{
     ]
     res.render('index' ,{
         nama:'josrel chandra',
-        title:'halaman home',
+        title:'Home Page',
         cont,
     })
 })
