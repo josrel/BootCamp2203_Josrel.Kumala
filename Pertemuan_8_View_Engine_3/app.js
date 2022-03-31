@@ -6,22 +6,22 @@ app.set('view engine', 'ejs')
 
 app.get('/',(req,res) =>{
     cont =[
-        // {
-        //     nama : '1',
-        //     email : '1@gmail.com'
-        // },
-        // {
-        //     nama : '2',
-        //     email : '2@gmail.com'
-        // },
-        // {
-        //     nama : '3',
-        //     email : '3@gmail.com'
-        // },
-        // {
-        //     nama : '4',
-        //     email : '4@gmail.com'
-        // },
+        {
+            nama : '1',
+            email : '1@gmail.com'
+        },
+        {
+            nama : '2',
+            email : '2@gmail.com'
+        },
+        {
+            nama : '3',
+            email : '3@gmail.com'
+        },
+        {
+            nama : '4',
+            email : '4@gmail.com'
+        },
     ]
     res.render('index' ,{
         nama:'josrel chandra',
