@@ -41,7 +41,8 @@ app.get('/',(req,res) =>{
 app.get('/about',(req,res) =>{    
     res.render('about',{
         title:'about page',
-        tulisan: 'halo view engine about josrel',
+        name:'Josrel Chandra',
+        tulisan: 'Maranatha Christian University',
         layout: 'layout/expresslayout',
     })
 })
