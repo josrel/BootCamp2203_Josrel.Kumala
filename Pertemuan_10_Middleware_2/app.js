@@ -6,8 +6,14 @@ const port = 3000
 
 app.set('view engine', 'ejs')
 app.use(expressLayout)
-app.use(express.static('asset'))
 app.use(morgan('dev'))
+//GET / 304 11.964 - -
+//GET = mengeluarkan log pada saat masuk kedalam page 
+// 304 = memberi informasi bahwa halaman tersebut adalah halaman static
+// 11.964 = memberi informasi waktu untuk nge-load filenya 
+
+
+app.use(express.static('asset'))
 
 app.use((res,req,next) => {
 console.log('Time : ', Date.now())
