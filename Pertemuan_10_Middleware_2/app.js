@@ -5,8 +5,8 @@ const morgan = require('morgan')
 const port = 3000
 
 app.set('view engine', 'ejs')
-app.use(expressLayout)
 app.use(morgan('dev'))
+app.use(expressLayout)
 //apa bila membuka halaman about
 //GET / 304 11.964 - -
 //GET  adalah method mengeluarkan log pada saat masuk kedalam page 
