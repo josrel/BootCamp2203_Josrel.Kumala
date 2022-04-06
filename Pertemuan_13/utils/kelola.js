@@ -13,7 +13,7 @@ if(!fs.existsSync(cekfile)){
 }
 
 const simpankontak = (kontaks) =>{
-    fs.writeFileSync('data/contacts.json', JSON.stringify(kontaks))
+    fs.writeFileSync('./data/contacts.json', JSON.stringify(kontaks))
 }
 
 //file sama kontak di pindahin ke fungsi baru supaya gampang di panggil di fungsi mana aja

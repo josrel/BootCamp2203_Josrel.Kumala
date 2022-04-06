@@ -6,6 +6,7 @@ const port = 3001
 
 app.set('view engine', 'ejs')
 app.use(expressLayout)
+app.use(express.urlencoded())
 
 app.use(express.static('asset'))
 
