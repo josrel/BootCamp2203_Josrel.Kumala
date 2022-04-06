@@ -31,6 +31,11 @@ const detailkontak = (nama) => {
     return kontak
 }
 
+const cekdobel = (nama) =>{
+    const kontaks = semuaContact()
+    return kontaks.find((kontak) => kontak.nama.toLowerCase() === nama.toLowerCase())
+}
+
 const tambahkontak = (kontak) => {
     const kontaks = semuaContact()
     kontaks.push(kontak)
@@ -40,5 +45,6 @@ const tambahkontak = (kontak) => {
 module.exports = {
     semuaContact,
     detailkontak,
-    tambahkontak
+    tambahkontak,
+    cekdobel
 }
