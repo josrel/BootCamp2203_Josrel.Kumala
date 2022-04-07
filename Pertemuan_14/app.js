@@ -6,6 +6,7 @@ const { body, validationResult, check } = require('express-validator')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
+const { ensureAuthenticated } = require('connect-ensure-authenticated')
 const port = 3000
 
 app.set('view engine', 'ejs')
@@ -93,6 +94,15 @@ app.get('/contact/delete/:nama', (req,res) => {
         res.redirect('/contact')
     }
 })
+
+app.post('/hapuskontak',(req, res) => {    
+    const { checkboxkontak } = req.body;
+    console.log(checkboxkontak);
+    checkboxkontak.forEach(kontak => {
+        hapuskontak(kontak)
+    });
+    res.redirect('/contact')
+});
 
 app.get('/contact/:nama',(req,res) =>{
     const detail = detailkontak(req.params.nama)

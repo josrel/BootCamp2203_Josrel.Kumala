@@ -19,24 +19,31 @@
                     <thead>
                         <tr>
                             <th scope="col"> </th>
+                            <th scope="col"> </th>
                             <th scope="col">Nama : </th>
                             <th scope="col">Email :</th>
                             <th scope="col">Action :</th>
                         </tr>
                     </thead>
                     <% let angka = 1 %> 
+                    <form action="/hapuskontak" method="POST">
                     <% kontaks.forEach(kontak => { %>
-                        <tr>
-                        <th scope="row"><%= angka++ %> </th>
-                        <td><%= kontak.nama %></td>
-                        <td><%= kontak.email %> </td>
-                        <td><a href="/contact/<%= kontak.nama %>"><span class="badge rounded-pill bg-success">detail</span></a></td>
+                        <tr> 
+                        <th scope="row"><input type="checkbox" id="hobby" name="checkboxkontak" value="<%= kontak.nama %>"/></th>
+                        <td><%= angka++ %></td>
+                            <td><%= kontak.nama %></td>
+                            <td><%= kontak.email %> </td>
+                            <td><a href="/contact/<%= kontak.nama %>"><span class="badge rounded-pill bg-success">detail</span></a></td>
                         </tr>
                     </tbody>
                     <% }) %>
                     <tbody>
                 </table>
                 <% } %> 
-        </div>
+            
+                 <button type="submit" class="btn badge rounded-pill bg-danger">
+                     Delete
+                    </button>
+         </div>
     </div>
 </div>
