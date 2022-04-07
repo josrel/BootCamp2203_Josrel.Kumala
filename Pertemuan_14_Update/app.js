@@ -96,22 +96,22 @@ app.get('/contact/delete/:nama', (req,res) => {
 })
 
 app.post('/hapuskontak',(req, res) => {    
-    var {checked} = req.body
+    const {checked} = req.body
     console.log(checked)
     console.log(checked.length)
-    // if(Array.isArray(checked)){
-    //     console.log('1')
-    //     checked.forEach(kontak => {
-    //         hapuskontak(kontak)
-    //         req.flash('msg',`${checked.length} data berhasil dihapus`)
-    //         res.redirect('/contact')
-    //     })
-    // } else {
-    //     hapuskontak(checked)
-    //     console.log('2')
-    //     req.flash('msg',`${checked} data berhasil dihapus`)
-    //     res.redirect('/contact')
-    // }
+    if(Array.isArray(checked)){
+        console.log('1')
+        checked.forEach(kontak => {
+            hapuskontak(kontak)
+            req.flash('msg',`${checked.length} data berhasil dihapus`)
+            res.redirect('/contact')
+        })
+    } else {
+        hapuskontak(checked)
+        console.log('2')
+        req.flash('msg',`${checked} data berhasil dihapus`)
+        res.redirect('/contact')
+    }
 })
 
 app.get('/contact/editkontak/:nama', (req, res) => {
