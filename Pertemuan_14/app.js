@@ -83,13 +83,13 @@ app.post('/contact',[
 })
 
 app.get('/contact/delete/:nama', (req,res) => {
-    const deletekontak = semuaContact(req.params.nama)
-
+    const deletekontak = detailkontak(req.params.nama)
     if(!deletekontak){
         res.status(404)
         res.send(`nama ${req.params.nama} tidak ditemukan`)
     }else{
         hapuskontak(req.params.nama)
+        req.flash('msg',`nama ${req.params.nama} berhasil dihapus`)
         res.redirect('/contact')
     }
 })
