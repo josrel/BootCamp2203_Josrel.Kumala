@@ -103,15 +103,14 @@ app.post('/hapuskontak',(req, res) => {
         console.log('1')
         checked.forEach(kontak => {
             hapuskontak(kontak)
-            req.flash('msg',`${checked.length} data berhasil dihapus`)
-            res.redirect('/contact')
         })
+        req.flash('msg',`${checked.length} data berhasil dihapus`)
     } else {
         hapuskontak(checked)
         console.log('2')
         req.flash('msg',`${checked} data berhasil dihapus`)
-        res.redirect('/contact')
     }
+    res.redirect('/contact')
 })
 
 app.get('/contact/editkontak/:nama', (req, res) => {
