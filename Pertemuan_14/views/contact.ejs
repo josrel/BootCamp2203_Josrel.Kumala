@@ -29,7 +29,7 @@
                     <form action="/hapuskontak" method="POST">
                     <% kontaks.forEach(kontak => { %>
                         <tr> 
-                        <th scope="row"><input type="checkbox" id="hobby" name="checkboxkontak" value="<%= kontak.nama %>"/></th>
+                        <th scope="row"><input type="checkbox" id="hobby" name="checked" value="<%= kontak.nama %>"/></th>
                         <td><%= angka++ %></td>
                             <td><%= kontak.nama %></td>
                             <td><%= kontak.email %> </td>
@@ -41,7 +41,7 @@
                 </table>
                 <% } %> 
             
-                 <button type="submit" class="btn badge rounded-pill bg-danger">
+                 <button type="submit" class="btn badge rounded-pill bg-danger" onclick="return confirm(`yakin ingin dihapus ?`)">
                      Delete
                     </button>
          </div>

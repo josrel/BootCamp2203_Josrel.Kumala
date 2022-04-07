@@ -96,13 +96,14 @@ app.get('/contact/delete/:nama', (req,res) => {
 })
 
 app.post('/hapuskontak',(req, res) => {    
-    const { checkboxkontak } = req.body;
-    console.log(checkboxkontak);
-    checkboxkontak.forEach(kontak => {
+    const { checked } = req.body
+    console.log(checked)
+    checked.forEach(kontak => {
         hapuskontak(kontak)
-    });
+    })
+    req.flash('msg',`${checked.length} data berhasil dihapus`)
     res.redirect('/contact')
-});
+})
 
 app.get('/contact/:nama',(req,res) =>{
     const detail = detailkontak(req.params.nama)
