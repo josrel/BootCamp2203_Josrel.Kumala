@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-8">
+      <form method="post" action="/contact">
+<br>
+        <% if (typeof errors != 'undefined') { %>
+          <div class="alert alert-danger" role="alert">
+              <ul>
+                  <% errors.forEach(error => { %>
+                      <li><%= error.msg %> </li>
+                  <% }) %>
+              </ul>
+            </div>
+      <% } %>
+
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama</label>
+          <input type="text" class="form-control" id="nama" aria-describedby="emailHelp" name="nama" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="nomor" class="form-label">Nomor</label>
+          <input type="text" class="form-control" id="nomor" aria-describedby="emailHelp" name="nomor" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
