@@ -13,6 +13,7 @@ app.get("/addasync", async(req,res) => {
         const email = "cobacoba@gmail.com"
         const newCont = await pool.query(`INSERT INTO contacts values ('${name}','${mobile}','${email}') RETURNING *`)
         res.json(newCont.rows)
+        res.redirect('/list')
     } catch(err){
         console.error(err.message)
     }
@@ -29,8 +30,9 @@ app.get("/list", async(req,res) => {
 
 app.get("/list/:name", async(req,res) => {
     try{
-        const listCont = await pool.query(`SELECT * FROM contacts where name='${req.params.name}'`)
+        const listCont = await pool.query(`SELECT name FROM contacts where name='${req.params.name}'`)
         res.json(listCont.rows)
+        console.log(listCont.rows)
     } catch(err){
         console.error(err.message)
     }
@@ -48,13 +50,15 @@ app.get("/update/:name/:email", async(req,res) => {
 
 app.get("/delete/:name", async(req,res) => {
     try{
-        const ceknama = await pool.query(`select name from contacts where name=${req.params.name}`)
-        if(req.params.name != ceknama ){
+        const arr = await pool.query(`SELECT name FROM contacts where name='${req.params.name}'`)
+        console.log(arr.rowCount)
+        console.log(req.params.name)
+        if(arr.rowCount == 0){
+            // res.redirect('/list')
             res.send(`nama ${req.params.name} tidak ditemukan`)
         } else {
             await pool.query(`DELETE FROM contacts WHERE name='${req.params.name}'`)
-            const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
-            res.json(listCont.rows)
+            res.redirect('/list')
         }
     } catch(err){
         console.error(err.message)
