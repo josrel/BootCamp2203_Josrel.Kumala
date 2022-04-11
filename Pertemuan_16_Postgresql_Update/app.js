@@ -36,9 +36,9 @@ app.get("/list/:name", async(req,res) => {
     }
 })
 
-app.get("/update/:name", async(req,res) => {
+app.get("/update/:name/:email", async(req,res) => {
     try{
-        await pool.query(`UPDATE contacts SET email='cobaupdate@gmail.com' WHERE name='${req.params.name}'`)
+        await pool.query(`UPDATE contacts SET email='${req.params.email}' WHERE name='${req.params.name}'`)
         const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
         res.json(listCont.rows)
     } catch(err){
@@ -48,9 +48,14 @@ app.get("/update/:name", async(req,res) => {
 
 app.get("/delete/:name", async(req,res) => {
     try{
-        await pool.query(`DELETE FROM contacts WHERE name='${req.params.name}'`)
-        const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
-        res.json(listCont.rows)
+        const ceknama = await pool.query(`select name from contacts where name=${req.params.name}`)
+        if(req.params.name != ceknama ){
+            res.send(`nama ${req.params.name} tidak ditemukan`)
+        } else {
+            await pool.query(`DELETE FROM contacts WHERE name='${req.params.name}'`)
+            const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
+            res.json(listCont.rows)
+        }
     } catch(err){
         console.error(err.message)
     }
