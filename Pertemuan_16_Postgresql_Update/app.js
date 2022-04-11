@@ -1,5 +1,7 @@
 const express = require('express')
 const { del } = require('express/lib/application')
+const req = require('express/lib/request')
+const res = require('express/lib/response')
 const app = express()
 const pool = require("./db")
 
@@ -51,6 +53,22 @@ app.get("/update/:name/:email", async(req,res) => {
         await pool.query(`UPDATE contacts SET email='${req.params.email}' WHERE name='${req.params.name}'`)
         const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
         res.json(listCont.rows)
+    } catch(err){
+        console.error(err.message)
+    }
+})
+
+//update 2
+app.get("/update2/:name", async (req,res) => {
+    try{
+        const name = "update2"
+        const mobile = "081111111111"
+        const email = "update@gmail.com"
+        const {rows : before} = await pool.query(`SELECT name,mobile,email FROM contacts where name='${req.params.name}'`)
+        const upCont = await pool.query(`UPDATE contacts SET name='${name}', mobile='${mobile}', email='${email}' WHERE name='${req.params.name}'`)
+        const {rows : after} = await pool.query(`SELECT name,mobile,email FROM contacts where name='${name}'`)
+    
+        res.json({before,after})
     } catch(err){
         console.error(err.message)
     }
