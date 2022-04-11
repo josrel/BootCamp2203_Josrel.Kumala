@@ -30,9 +30,17 @@ app.get("/list", async(req,res) => {
 
 app.get("/list/:name", async(req,res) => {
     try{
-        const listCont = await pool.query(`SELECT name FROM contacts where name='${req.params.name}'`)
-        res.json(listCont.rows)
-        console.log(listCont.rows)
+        const arr = await pool.query(`SELECT name FROM contacts where name='${req.params.name}'`)
+        console.log(arr.rowCount)
+        console.log(req.params.name)
+        if(arr.rowCount == 0){
+            // res.redirect('/list')
+            res.send(`nama ${req.params.name} tidak ditemukan`)
+        } else {
+            const listCont = await pool.query(`SELECT name,mobile,email FROM contacts where name='${req.params.name}'`)
+            res.json(listCont.rows)
+            console.log(listCont.rows)
+        }
     } catch(err){
         console.error(err.message)
     }
