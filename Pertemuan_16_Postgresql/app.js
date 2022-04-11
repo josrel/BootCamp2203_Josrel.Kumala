@@ -27,6 +27,15 @@ app.get("/list", async(req,res) => {
     }
 })
 
+app.get("/list/:name", async(req,res) => {
+    try{
+        const listCont = await pool.query(`SELECT * FROM contacts where name='${req.params.name}'`)
+        res.json(listCont.rows)
+    } catch(err){
+        console.error(err.message)
+    }
+})
+
 app.get("/updatecontact", async(req,res) => {
     try{
         await pool.query(`UPDATE contacts SET email='cobagan@gmail.com' WHERE name='chandra'`)
