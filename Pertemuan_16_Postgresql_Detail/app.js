@@ -46,9 +46,9 @@ app.get("/updatecontact", async(req,res) => {
     }
 })
 
-app.get("/deletecontact", async(req,res) => {
+app.get("/delete/:name", async(req,res) => {
     try{
-        await pool.query(`DELETE FROM contacts WHERE name='cobacoba'`)
+        await pool.query(`DELETE FROM contacts WHERE name='${req.params.name}'`)
         const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
         res.json(listCont.rows)
     } catch(err){
