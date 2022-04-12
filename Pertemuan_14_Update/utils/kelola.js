@@ -20,6 +20,7 @@ const simpankontak = (kontaks) =>{
 const semuaContact = () => {
     //baca dulu isi filenya jsonnya
     const file = fs.readFileSync('data/contacts.json','utf-8')
+    console.log(file)
     //buat file jadi format json biar masuk ke file format json
     const contacts = JSON.parse(file)
     return contacts

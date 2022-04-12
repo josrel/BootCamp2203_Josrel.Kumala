@@ -24,6 +24,9 @@ app.get("/addasync", async(req,res) => {
 app.get("/list", async(req,res) => {
     try{
         const listCont = await pool.query(`SELECT name, mobile, email FROM contacts`)
+        console.log(listCont.rows)
+        const asd = JSON.parse(JSON.stringify(listCont))
+        console.log(asd.rows)
         res.json(listCont.rows)
     } catch(err){
         console.error(err.message)
