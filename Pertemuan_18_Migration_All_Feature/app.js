@@ -61,7 +61,13 @@ app.get('/contact', async(req,res) =>{
     }
 })
 
-// app.get('/contact',listcontact())
+app.get('/contact/tambahkontak',(req,res) =>{
+    res.render('tambahkontak',{
+        title:'contact page',
+        tulisan: 'halo view engine contact josrel',
+        layout: 'layout/expresslayout'
+    })
+})
 
 //DETAIL CONTACT
 app.get('/contact/:nama', async(req,res) =>{
@@ -88,13 +94,7 @@ app.get('/contact/:nama', async(req,res) =>{
 
 
 //PINDAH KE FORM TAMBAH CONTACT
-app.get('/contact/tambahkontak',(req,res) =>{
-    res.render('tambahkontak',{
-        title:'contact page',
-        tulisan: 'halo view engine contact josrel',
-        layout: 'layout/expresslayout'
-    })
-})
+
 
 //TAMBAH KONTAK
 app.post("/contact",[
@@ -103,6 +103,7 @@ app.post("/contact",[
         console.log(dobel.rowCount)
         if(dobel.rowCount > 0){
             throw new Error(`nama ${value} sudah terdaftar`)
+            console.log(1)
         } else{
             return true
         }
@@ -169,6 +170,7 @@ app.post("/contact/update", [
             return true
         } else if (dobel.rowCount > 0) {
             throw new Error(`nama ${value} sudah terdaftar`)
+            // console.log(1)
          } else{
              return true
          }
