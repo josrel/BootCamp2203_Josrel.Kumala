@@ -44,6 +44,13 @@ app.get('/about',(req,res) =>{
     })
 })
 
+app.get('/register',(req,res) =>{    
+    res.render('login',{
+        title:'register page',
+        layout: 'layout/expresslayout'
+    })
+})
+
 //LIST CONTACT
 app.get('/contact', async(req,res) =>{
     try{

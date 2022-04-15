@@ -1,0 +1,24 @@
+
+
+<div class="container">
+  <header>
+    <%- include('../views/layout/nav') %> 
+  </header>
+  <a href="/tambahsubmain" class="btn btn-secondary mt-3 mb-3 float-end"><i class="bi bi-plus-lg"></i> tambah Thread</a>
+    <div class="row">
+        <div class="col-md-8">
+            <br>
+            <h1 class="mt-5">Thread list</h1>
+            <% submain.forEach(element => { %>           
+              <div class="list-group">
+                <a href="/discussion/<%= element.judul_thread %>" class="list-group-item-action"><h2><%= element.judul_thread %></h2></a>
+                <p id="tampung"></p>
+                <%= element.deskripsi_thread %>
+                <b><%= element.time %></b>
+                <span> dibuat oleh : <b><%= element.creator %> </b></span>
+              <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+               </div>
+            <% }) %>
+         </div>
+    </div>
+  </div>

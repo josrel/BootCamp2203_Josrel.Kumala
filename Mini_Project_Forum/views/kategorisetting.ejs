@@ -1,0 +1,46 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <br>
+            <a href="/tambahmain" class="btn btn-secondary mt-3 mb-3 float-end">tambah kategori</a>
+            <h2 class="mt-5">Kategori list</h2>
+            <% if (msg.length !== 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= msg %> 
+                </div>
+                <% } %>
+            <% if (main.length == 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    data kosong
+                  </div>
+               <% } else { %>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col"> </th>
+                            <th scope="col">Nama Topik: </th>
+                        </tr>
+                    </thead>
+                    <% let angka = 1 %> 
+                    <form action="/hapustopik" method="POST">
+                    <% main.forEach(element => { %>
+                        <tr> 
+                        <th scope="row"><input type="checkbox" id="hobby" name="checked" value="<%= element.nama_kategori %>"/></th>
+                        <td><%= angka++ %></td>
+                            <td><%= element.nama_kategori %></td>
+                            <td><a href="/edit/<%= element.nama_kategori %>"><span class="badge rounded-pill bg-success">edit deskripsi</span></a></td>
+                        </tr>
+                    </tbody>
+                    <% }) %>
+                    <tbody>
+                </table>
+                <% } %> 
+            
+                 <button type="submit" class="btn badge rounded-pill bg-danger" onclick="return confirm(`yakin ingin dihapus ?`)">
+                     Delete
+                    </button>
+         </div>
+    </div>
+</div>

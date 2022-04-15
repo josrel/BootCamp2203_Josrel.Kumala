@@ -1,0 +1,18 @@
+<header>
+  <%- include('../views/layout/nav') %> 
+</header>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-8">
+          <br>
+          <a href="/kategorisetting" class="btn btn-secondary mt-3 mb-3 float-end"><i class="bi bi-gear"></i> Kategori Setting</a>
+          <h1 class="mt-2">Forum list</h1>
+          <% main.forEach(element => { %>      
+              <a href="/submain/<%= element.nama_kategori %>" class="text-black"><h2><%= element.nama_kategori %></h2></a>
+              <%= element.detail_kategori %>
+              <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <% }) %>
+          </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-8 mt-5">
+      <form method="post" action="/main_discussion">
+<br>
+        <% if (typeof errors != 'undefined') { %>
+          <div class="alert alert-danger" role="alert">
+              <ul>
+                  <% errors.forEach(error => { %>
+                      <li><%= error.msg %> </li>
+                  <% }) %>
+              </ul>
+            </div>
+      <% } %>
+
+        <div class="mb-3">
+          <label for="nama" class="form-label">Merk</label>
+          <input type="text" class="form-control" id="nama" aria-describedby="emailHelp" name="nama" required>
+        </div>
+        <div class="mb-3">
+          <label for="nomor" class="form-label">Deskripsi</label>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="deskripsi"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
