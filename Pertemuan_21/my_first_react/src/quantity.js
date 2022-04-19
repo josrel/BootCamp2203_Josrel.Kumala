@@ -4,31 +4,24 @@ class qty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicks: 0,
-      show: true
+      tampung: 0
     };
   }
 
-  IncrementItem = () => {
-    this.setState({ clicks: this.state.clicks + 1 });
+  tambah = () => {
+    this.setState({ tampung: this.state.tampung + 1 });
   }
-  DecreaseItem = () => {
-    this.setState({ clicks: this.state.clicks - 1 });
-  }
-  ToggleClick = () => {
-    this.setState({ show: !this.state.show });
+  kurang = () => {
+    this.setState({ tampung: this.state.tampung - 1 });
   }
 
   render() {
     return (
-      <div>
-        <button onClick={this.IncrementItem}>add</button>
-        {/* <button onClick={this.DecreaseItem}>Click to decrease by 1</button> */}
-        {/* <button onClick={this.ToggleClick}>
-          { this.state.show ? 'Hide number' : 'Show number' }
-        </button> */}
-        { this.state.show ? <h2>Quantity : { this.state.clicks }</h2> : '' }
-      </div>
+      <React.Fragment>
+          <button onClick={this.tambah}>tambah</button>
+          <button onClick={this.kurang}>kurang</button>
+          <h2>Quantity : { this.state.tampung }</h2>
+      </React.Fragment>
     );
   }
 }
