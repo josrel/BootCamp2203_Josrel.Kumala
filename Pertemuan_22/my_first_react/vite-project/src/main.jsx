@@ -9,6 +9,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Nav />
+    <br></br>
     <Coba />
     {/* <App /> */}
   </React.StrictMode>

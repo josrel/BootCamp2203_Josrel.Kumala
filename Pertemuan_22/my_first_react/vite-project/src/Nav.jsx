@@ -1,36 +1,45 @@
-import react from "react";
+import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const nav = () => {
-    return(
-        <react.Fragment>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                </div>
-            </div>
-            </nav>
-        </react.Fragment>
-    )
+class nav extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+      }
+    
+      componentDidMount() {
+        this.timerID = setInterval(() => this.tick(),1000);
+      }
+    
+      tick() {
+        this.setState({
+          date: new Date()
+        });
+      }
+
+    render(){
+        return(
+            <React.Fragment>
+                    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+                    <Container>
+                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                        <Nav.Link href="#features">Features</Nav.Link>
+                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        </Nav>
+                        <Nav>
+                        <Nav.Link href="#deets">{this.state.date.toLocaleTimeString()}</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                    </Container>
+                    </Navbar>
+            </React.Fragment>
+        )
+    }
 }
 
 
