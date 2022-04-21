@@ -6,6 +6,8 @@ import Coba from './Toast'
 import TextList from './textList'
 import Contact from './cobakontak'
 import './index.css'
+import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Nav />
     <br></br>
     <Coba />
-    {/* <Contact /> */}
     <TextList />
     {/* <App /> */}
 
