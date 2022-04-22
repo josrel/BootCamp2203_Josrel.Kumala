@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-weight: 300;
+}
+.navbar__title {
+    margin-right: auto;
+}
+.navbar__item {
+    padding: 16px 16px;
+    vertical-align: middle;
+}
