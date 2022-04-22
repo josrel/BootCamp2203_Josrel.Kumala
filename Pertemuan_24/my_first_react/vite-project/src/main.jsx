@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Nav />
     <br></br>
     <Coba />
+    <br />
     {/* <TextList /> */}
     <App />
 
