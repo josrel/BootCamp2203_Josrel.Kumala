@@ -16,7 +16,7 @@ const EditList = ({contact}) => {
   const handleUpdate = async e => {
       e.preventDefault()
     try {
-        const body = {updateNama}
+        const body = {updateNama,updateTelp,updateEmail}
         const response = await fetch(`http://localhost:3001/contact/${contact.id}`,
         {
             method:"PUT",
@@ -24,6 +24,7 @@ const EditList = ({contact}) => {
             body: JSON.stringify(body)
         })
         console.log(response)
+        handleClose()
     } catch (error) {
         console.error(error.massage)
     }
@@ -54,6 +55,7 @@ const EditList = ({contact}) => {
                 <Form.Control
                   type="text"
                   value={updateEmail}
+                  onChange={e => setUpdateEmail(e.target.value)}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -61,6 +63,7 @@ const EditList = ({contact}) => {
                 <Form.Control
                   type="text"
                   value={updateTelp}
+                  onChange={e => setUpdateTelp(e.target.value)}
                 />
               </Form.Group>
               <Button variant="primary" type="submit"
@@ -69,12 +72,6 @@ const EditList = ({contact}) => {
               </Button>
             </Form>
           </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
         </Modal>
       </>
     </div>

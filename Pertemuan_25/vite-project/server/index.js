@@ -69,8 +69,8 @@ app.post("/contact", async (req,res) => {
 //update contact
 app.put("/contact/:id", async(req,res) => {
     try {
-        const {nama, email, telp } = req.body
-        await pool.query(`UPDATE users SET nama='${nama}',email='${email}',telp='${telp}' WHERE id='${req.params.id}'`)
+        const {updateNama, updateTelp,updateEmail } = req.body
+        await pool.query(`UPDATE users SET nama='${updateNama}',telp='${updateTelp}',email='${updateEmail}' WHERE id='${req.params.id}'`)
         res.json("berhasil update contact !")
     } catch (error) {
         console.error(error.message)

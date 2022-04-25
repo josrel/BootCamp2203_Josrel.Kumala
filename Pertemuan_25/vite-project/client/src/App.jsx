@@ -1,13 +1,20 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css"
 import Table from "react-bootstrap/Table";
 import AddList from "./component/addList";
 import Button from "react-bootstrap/Button";
 import EditList from "./component/editList";
+import DelList from "./component/deleteList";
+import DetailList from "./component/detailList";
+import Card from "react-bootstrap/Card";
+import List from "./component/allList";
 
 function App() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [list, setList] = useState([]);
 
   const getContact = async () => {
@@ -20,51 +27,15 @@ function App() {
     }
   };
 
-  const delContact = async (id) => {
-    try {
-      await fetch(`http://localhost:3001/contact/${id}`, {
-        method: "DELETE",
-      });
-      setList(list.filter((contact) => contact.id !== id));
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
   useEffect(() => {
     getContact();
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <AddList />
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>nama</th>
-            <th>telp</th>
-            <th>email</th>
-            <th>delete</th>
-            <th>edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((contact) => (
-            <tr>
-              <td>{contact.nama}</td>
-              <td>{contact.telp}</td>
-              <td>{contact.email}</td>
-              <td>
-                <Button onClick={() => delContact(contact.id)}>delete</Button>
-              </td>
-              <td>
-                <EditList contact={contact}/>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+      <List contact={list}/>
+    </React.Fragment>
   );
 }
 
