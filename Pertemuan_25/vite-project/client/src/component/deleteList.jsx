@@ -14,21 +14,8 @@ const DelList = ({contact}) => {
           console.error(error.message);
         }
       };
-
-      async function handleRemove(id){
-          try {
-              let data = [...list]
-              let filteredData = data.filter((contact) => contact.id !== id)
-              await fetch(`http://localhost:3001/contact/${contact.id}`, {
-                method: "DELETE",
-              })
-              setList(filteredData)
-          } catch (error) {
-            console.error(error.message);
-          }
-      }
       return(
-          <Button onClick={handleRemove}>delete</Button>
+          <Button onClick={delContact}>delete</Button>
       )
 }
 

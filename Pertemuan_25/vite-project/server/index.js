@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3001;
+const port = 3002;
 const pool = require("./db");
 const controller = require("../ultis/controller");
 const cors = require('cors')
