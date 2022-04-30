@@ -35,37 +35,41 @@ export default function Forum({ list_forum, name }) {
 
   const AllForum = list_forum.map((list) => {
     return (
-      <React.Fragment>
-        <>
-          <Card>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-              <Card.Header>
-                <h2>{list.judul_forum}</h2>{" "}
-              </Card.Header>
+        <React.Fragment>
+          <>
+            <Card>
+              <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
-            <blockquote className="blockquote mb-0">
-              <p>{list.des_forum}</p>
-              <footer className="blockquote-footer">
-                jam terakhir <cite title="Source Title">{list.creator}</cite>
-              </footer>
-            </blockquote>
-          </Card.Body>
-            </Card.Body>
-          </Card>
-          <br />
-        </>
-        <Button variant="link">
-          <Badge bg="primary" onClick={() => setShow(!show)}>
-            See All Comment
-          </Badge>
-        </Button>
-        <Button variant="link">
-          <Badge bg="danger" onClick={() => setShowReply(!showReply)}>
-            Comment
-          </Badge>
-        </Button>
-      </React.Fragment>
+                <Card.Header>
+                  <Link to={"/thread/"+list.id}>
+                    <h2>{list.judul_forum}</h2>
+                  </Link>
+                  <a href={"/thread/" + list.id}><h2>{list.judul_forum}</h2></a>
+                </Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>{list.des_forum}</p>
+                    <footer className="blockquote-footer">
+                      jam terakhir{" "}
+                      <cite title="Source Title">{list.creator}</cite>
+                    </footer>
+                  </blockquote>
+                </Card.Body>
+              </Card.Body>
+            </Card>
+            <br />
+          </>
+          <Button variant="link">
+            <Badge bg="primary" onClick={() => setShow(!show)}>
+              See All Comment
+            </Badge>
+          </Button>
+          <Button variant="link">
+            <Badge bg="danger" onClick={() => setShowReply(!showReply)}>
+              Comment
+            </Badge>
+          </Button>
+        </React.Fragment>
     );
   });
 

@@ -32,11 +32,11 @@ const upload = multer({ storage });
 
 app.post("/forumUpload/:id", upload.single("photo"), async (req, res) => {
   try {
-    const tampung = await pool.query("SELECT MAX(id) from forum ")
     let finalImageURL = "/uploads/" + req.file.filename;
+    console.log(req.params.id)
     res.json({ status: "success", image: finalImageURL });
     await pool.query(
-      `UPDATE forum SET image='${finalImageURL}'WHERE id='${tampung.rows}' `
+      `UPDATE forum SET image='${finalImageURL}'WHERE id='${req.params.id}' `
     );
   } catch (error) {
     console.error(error.message);
@@ -100,47 +100,44 @@ app.put("/forum/:id", async (req, res) => {
   }
 });
 
-
 //list thread
-app.get("/thread/:judul", async (req, res) => {
-    try {
-        console.log(req.params.judul)
-    //   const forum_list = await pool.query(`SELECT * FROM forum`);
-    //   res.json(forum_list.rows);
-    } catch (error) {
-      console.error(error.message);
-    }
-  });
+app.get("/thread/:id", async (req, res) => {
+  try {
+      console.log(req.params.id)
+    const thread_list = await pool.query(`SELECT * FROM thread where id_forum=${req.params.id}`);
+    res.json(thread_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
-
-
-  //list comment
+//list comment
 
 //forum list
 app.get("/comment", async (req, res) => {
-    try {
-      const comment_list = await pool.query(`
+  try {
+    const comment_list = await pool.query(`
       SELECT *
       FROM comment
       `);
-      res.json(comment_list.rows);
-    } catch (error) {
-      console.error(error.message);
-    }
-  });
+    res.json(comment_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 //add comment
 app.post("/comment", async (req, res) => {
-    try {
-      const { comment, name } = req.body;
-      const newCont = await pool.query(
-        `INSERT INTO comment (comment,user_comment,jam_comment) values ('${comment}','${name}','${Date()}') RETURNING *`
-      );
-      res.json(newCont.rows);
-      // console.log(req.body);
-    } catch (error) {
-      console.error(error.message);
-    }
-  });
+  try {
+    const { comment, name } = req.body;
+    const newCont = await pool.query(
+      `INSERT INTO comment (comment,user_comment,jam_comment) values ('${comment}','${name}','${Date()}') RETURNING *`
+    );
+    res.json(newCont.rows);
+    // console.log(req.body);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
 app.listen(port, () => {
   console.log("server is running on port 3001");

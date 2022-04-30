@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect,component } from "react";
 import "./App.css";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
+import Thread from "./components/Thread";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,6 +72,7 @@ function App() {
                 )
               }
             />
+            <Route path="/thread/:id" component={Thread}/>
           </Switch>
         </div>
       </BrowserRouter>

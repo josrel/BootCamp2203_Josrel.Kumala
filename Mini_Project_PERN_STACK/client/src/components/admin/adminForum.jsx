@@ -2,62 +2,48 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import AdminEdit from "./adminEditForum";
+import AdminUpload from "./adminUploadForum"
 import Badge from "react-bootstrap/Badge";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Comment from "../comment";
+import Modal from "react-bootstrap/Modal";
+import AdminDelete from "./adminDeleteForum";
+import Thread from "../Thread";
 
 export default function Forum({ forum }) {
-  const [list, setList] = useState([forum]);
-  const [show, setShow] = useState(false);
-  const [showReply, setShowReply] = useState(false);
 
-  async function handleRemove(id) {
-    try {
-      let data = [...list];
-      console.log(id);
-      let filteredData = data.filter((forum) => forum.id !== id);
-      await fetch(`http://localhost:3001/forum/${id}`, {
-        method: "DELETE",
-      });
-      setList(filteredData);
-      window.location = "/dashboard";
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
 
   const AdminForum = forum.map((list) => {
     return (
       <React.Fragment>
-        
-        <Card>
-          <Card.Header>
             {/* <h2>{"../../../../server/public" + list.image}</h2> */}
-            <img
-              style={{ width: "300px" }}
-              src={"http://localhost:3001/" + list.image}
-              alt=""
-            />
-            <h2>{list.judul_forum}</h2>
-          </Card.Header>
+        <Card>
+          <Card.Img variant="top" src={"http://localhost:3001/" + list.image} />
           <Card.Body>
-            <blockquote className="blockquote mb-0">
-              <p>{list.des_forum}</p>
-              <footer className="blockquote-footer">
-                {list.jam} <cite title="Source Title">{list.creator}</cite>
-              </footer>
-            </blockquote>
-            <div className="button-admin">
+            <Card.Header>
+                <h2 onClick={() => window.location=(`/thread/${list.id}`)}>{list.judul_forum}</h2>
+            </Card.Header>
+            <Card.Body>
+              <blockquote className="blockquote mb-0">
+                <p>{list.des_forum}</p>
+                <footer className="blockquote-footer">
+                  jam terakhir <cite title="Source Title">{list.creator}</cite>
+                </footer>
+              </blockquote>
+              <div className="button-admin">
               <Card.Link>
-                <Button variant="danger" onClick={() => handleRemove(list.id)}>
-                  {list.id}
-                </Button>
+                <AdminDelete forum={list} />
               </Card.Link>
               <Card.Link>
                 <AdminEdit forum={list} />
               </Card.Link>
+              <Card.Link>
+                <AdminUpload forum={list} />
+              </Card.Link>
             </div>
+            </Card.Body>
           </Card.Body>
         </Card>
       </React.Fragment>

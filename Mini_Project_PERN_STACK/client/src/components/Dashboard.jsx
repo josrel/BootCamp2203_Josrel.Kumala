@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Card from "react-bootstrap/Card";
 import Forum from "./Forum";
 import AdminForum from "./admin/adminForum";
 import AddForum from "./AddForum";
@@ -72,7 +71,7 @@ const Dashboard = ({ setAuth }) => {
       {name == "1" ? (
         <AdminForum forum={list} name={name} />
       ) : (
-        <Forum list_forum={list} name={name} />
+        <Forum list_forum={list} name={name}/>
       )}
     </Fragment>
   );
