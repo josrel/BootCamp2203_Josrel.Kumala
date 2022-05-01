@@ -34,7 +34,7 @@ const EditList = ({ list_thread }) => {
               .then((res) => res.json())
               .then((data) => {
                 if (data.status === "success") {
-                  window.location = `/thread/${list_thread.id}`;
+                  window.location = `/post/${list_thread.id}`;
                 }
               });
           }

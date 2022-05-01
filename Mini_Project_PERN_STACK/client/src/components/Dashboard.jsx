@@ -56,7 +56,6 @@ const Dashboard = ({ setAuth }) => {
     <Fragment>
       <Navigasi setAuth={setAuth} />
       <h1>Forum List</h1>
-      <AddForum name={name} />
       {name == "1" ? (
         <AdminForum forum={list} name={name} />
       ) : (

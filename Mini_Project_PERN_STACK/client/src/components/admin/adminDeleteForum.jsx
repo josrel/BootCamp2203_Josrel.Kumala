@@ -21,7 +21,7 @@ const DeleteList = ({ forum }) => {
   return (
     <div>
       <Button variant="danger" onClick={() => handleRemove(forum.id)}>
-        {forum.id}
+        Delete
       </Button>
     </div>
   );

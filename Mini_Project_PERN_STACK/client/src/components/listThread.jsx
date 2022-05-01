@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import DeleteThread from "./admin/adminDeleteThread";
 
-export default function ListThread({ list, id_thread }) {
+export default function ListThread({ list, id_thread,name }) {
   const AllList = list.map((list) => {
     return (
       <div>
@@ -14,7 +14,7 @@ export default function ListThread({ list, id_thread }) {
             <blockquote className="blockquote mb-0">
               <p> {list.des_thread} </p>
               <footer className="blockquote-footer">
-                {list.jam} <cite title="Source Title">oleh {list.creator}</cite>
+                {list.jam} <cite title="Source Title">oleh {list.creator} </cite>
               </footer>
             </blockquote>
             <Card.Link>

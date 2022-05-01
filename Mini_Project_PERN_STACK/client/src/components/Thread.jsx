@@ -48,7 +48,7 @@ const Thread = (props) => {
     <React.Fragment>
       <Navigasi />
       <AddThread name={name} id={props.match.params.id}/>
-      <ListThread list={list} id_thread={props.match.params.id}/>
+      <ListThread list={list} id_thread={props.match.params.id} name={name}/>
     </React.Fragment>
   );
 }

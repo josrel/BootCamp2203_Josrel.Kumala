@@ -121,10 +121,12 @@ app.post("/thread", async (req, res) => {
   try {
     const { judul_thread, des_thread, name, id } = req.body;
     const newCont = await pool.query(
-      `INSERT INTO thread (judul_thread,des_thread,creator,jam,id_forum) values ('${judul_thread}','${des_thread}','${name}','${Date().replace(
-        " GMT+0700 (Western Indonesia Time)",
-        ""
-      )}','${id}') RETURNING *`
+      `INSERT INTO thread (judul_thread,des_thread,creator,jam,id_forum) values ('
+      ${judul_thread}',
+      '${des_thread}',
+      '${name}',
+      '${Date().replace(" GMT+0700 (Western Indonesia Time)","")}',
+      '${id}') RETURNING *`
     );
     res.json(newCont.rows);
     // console.log(req.body);
@@ -213,6 +215,49 @@ app.post("/comment", async (req, res) => {
     console.error(error.message);
   }
 });
+
+//edit profile
+app.put("/profile/:id", async (req, res) => {
+  try {
+    const { updateNama} = req.body;
+    await pool.query(
+      `UPDATE users SET user_name='${updateNama}'WHERE user_name='${req.params.id}'`
+    );
+    res.json("berhasil update contact !");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//add profile picture
+app.post("/profilepicture/:id", upload.single("photo"), async (req, res) => {
+  try {
+    let finalImageURL = "/uploads/" + req.file.filename;
+    console.log(req.params.id);
+    res.json({ status: "success", image: finalImageURL });
+    await pool.query(
+      `UPDATE users SET image='${finalImageURL}'WHERE user_name='${req.params.id}' `
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//list users
+app.get("/users/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const thread_list = await pool.query(
+      `SELECT * FROM users where user_name=${req.params.id}`
+    );
+    res.json(thread_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+
+
 
 app.listen(port, () => {
   console.log("server is running on port 3001");
