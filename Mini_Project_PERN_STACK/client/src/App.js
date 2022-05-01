@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Thread from "./components/Thread";
+import Post from "./components/Post";
+import Comment from "./components/comment";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -73,6 +75,8 @@ function App() {
               }
             />
             <Route path="/thread/:id" component={Thread}/>
+            <Route path="/post/:id" component={Post}/>
+            <Route path="/comment/:id" component={Comment}/>
           </Switch>
         </div>
       </BrowserRouter>

@@ -3,10 +3,20 @@ import ListThread from "./listThread";
 import Button from "react-bootstrap/Button";
 import Dashboard from "./Dashboard";
 import Navigasi from "./Nav";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 import AddThread from "../components/AddThread"
+import ListPost from "./listPost"
+import Form from "react-bootstrap/Form";
+import Badge from 'react-bootstrap/Badge'
+import AddComment from "./addComment"
+import Comment from "./comment";
 
-const Thread = (props) => {
+const Post = (props) => {
   const [list, setList] = useState([]);
+  const [show, setShow] = useState(false);
+  const [showReply, setShowReply] = useState(false);
+
+  const [comment, setComment] = useState([]);
 
   const [name, setName] = useState("");
   async function getName() {
@@ -33,10 +43,10 @@ const Thread = (props) => {
     try {
       console.log(props.match.params.id)
       const id = props.match.params.id
-      const response = await fetch(`http://localhost:3001/thread/${id}`);
+      const response = await fetch(`http://localhost:3001/post/${id}`);
       const jsondata = await response.json();
-      // console.log(jsondata);
       setList(jsondata);
+      console.log(list);
     } catch (error) {
       console.log(error.message);
     }
@@ -44,13 +54,15 @@ const Thread = (props) => {
   useEffect(() => {
     getThread();
   }, []);
+
+  
   return (
     <React.Fragment>
-      <Navigasi />
-      <AddThread name={name} id={props.match.params.id}/>
-      <ListThread list={list} id_thread={props.match.params.id}/>
+        <Navigasi />
+        <ListPost list={list} />
+        <Comment id_post={props.match.params.id}/>
     </React.Fragment>
   );
 }
 
-export default Thread
+export default Post

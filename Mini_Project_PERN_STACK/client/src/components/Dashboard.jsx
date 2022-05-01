@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Forum from "./Forum";
 import AdminForum from "./admin/adminForum";
 import AddForum from "./AddForum";
+import Navigasi from "./Nav"
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -53,19 +54,7 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>Bootcamp Mini Project</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto"></Nav>
-            <Nav>
-              <Nav.Link>Hello {name} !</Nav.Link>
-              <Nav.Link onClick={(e) => logout(e)}>Logout</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Navigasi setAuth={setAuth} />
       <h1>Forum List</h1>
       <AddForum name={name} />
       {name == "1" ? (

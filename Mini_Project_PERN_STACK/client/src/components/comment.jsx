@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
+import AddComment from "./addComment";
+import ListComment from "./listComment";
 
-export default function Comment() {
+
+const Comment = ({id_post}) => {
   const [list, setList] = useState([]);
+  // console.log(this.props.match.params.id)
 
   const getComment = async () => {
     try {
-      const response = await fetch("http://localhost:3001/comment");
+      console.log(id_post)
+      const response = await fetch(`http://localhost:3001/comment/${id_post}`);
       const jsondata = await response.json();
-      console.log(jsondata);
+      // console.log(jsondata);
       setList(jsondata);
+      console.log(list)
     } catch (error) {
       console.log(error.message);
     }
@@ -18,22 +23,13 @@ export default function Comment() {
     getComment();
   }, []);
 
-  const UserComment = list.map((list) => {
-    return (
-      <React.Fragment>
-        <Card>
-          <Card.Body>
-            <blockquote className="blockquote mb-0">
-              <p>{list.comment}</p>
-              <footer className="blockquote-footer">
-                <cite title="Source Title">{list.user_comment}</cite>
-              </footer>
-            </blockquote>
-          </Card.Body>
-        </Card>
-      </React.Fragment>
-    );
-  });
+  return (
+    <React.Fragment>
+      <AddComment id_post={id_post}/>
+      <ListComment list_comment={list}/>
 
-  return <div>{UserComment}</div>;
+    </React.Fragment>
+  );
 }
+
+export default Comment

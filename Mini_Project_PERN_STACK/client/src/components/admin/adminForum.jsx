@@ -29,7 +29,7 @@ export default function Forum({ forum }) {
               <blockquote className="blockquote mb-0">
                 <p>{list.des_forum}</p>
                 <footer className="blockquote-footer">
-                  jam terakhir <cite title="Source Title">{list.creator}</cite>
+                  {list.jam} <cite title="Source Title">oleh {list.creator}</cite>
                 </footer>
               </blockquote>
               <div className="button-admin">

@@ -33,7 +33,7 @@ const upload = multer({ storage });
 app.post("/forumUpload/:id", upload.single("photo"), async (req, res) => {
   try {
     let finalImageURL = "/uploads/" + req.file.filename;
-    console.log(req.params.id)
+    console.log(req.params.id);
     res.json({ status: "success", image: finalImageURL });
     await pool.query(
       `UPDATE forum SET image='${finalImageURL}'WHERE id='${req.params.id}' `
@@ -68,7 +68,10 @@ app.post("/forum", async (req, res) => {
   try {
     const { judul_forum, des_forum, name } = req.body;
     const newCont = await pool.query(
-      `INSERT INTO forum (judul_forum,des_forum,creator,jam) values ('${judul_forum}','${des_forum}','${name}','${Date()}') RETURNING *`
+      `INSERT INTO forum (judul_forum,des_forum,creator,jam) values ('${judul_forum}','${des_forum}','${name}','${Date().replace(
+        " GMT+0700 (Western Indonesia Time)",
+        ""
+      )}') RETURNING *`
     );
     res.json(newCont.rows);
     // console.log(req.body);
@@ -103,34 +106,106 @@ app.put("/forum/:id", async (req, res) => {
 //list thread
 app.get("/thread/:id", async (req, res) => {
   try {
-      console.log(req.params.id)
-    const thread_list = await pool.query(`SELECT * FROM thread where id_forum=${req.params.id}`);
+    console.log(req.params.id);
+    const thread_list = await pool.query(
+      `SELECT * FROM thread where id_forum=${req.params.id}`
+    );
     res.json(thread_list.rows);
   } catch (error) {
     console.error(error.message);
   }
 });
 
-//list comment
-
-//forum list
-app.get("/comment", async (req, res) => {
+// add thread list
+app.post("/thread", async (req, res) => {
   try {
-    const comment_list = await pool.query(`
-      SELECT *
-      FROM comment
-      `);
-    res.json(comment_list.rows);
+    const { judul_thread, des_thread, name, id } = req.body;
+    const newCont = await pool.query(
+      `INSERT INTO thread (judul_thread,des_thread,creator,jam,id_forum) values ('${judul_thread}','${des_thread}','${name}','${Date().replace(
+        " GMT+0700 (Western Indonesia Time)",
+        ""
+      )}','${id}') RETURNING *`
+    );
+    res.json(newCont.rows);
+    // console.log(req.body);
   } catch (error) {
     console.error(error.message);
   }
 });
+
+//delete thread list
+app.delete("/thread/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    await pool.query(`DELETE FROM thread WHERE id='${req.params.id}'`);
+    res.json("berhasil delete contact");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//list post
+app.get("/post/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const thread_list = await pool.query(
+      `SELECT * FROM thread where id=${req.params.id}`
+    );
+    res.json(thread_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//upload post
+app.post("/thread/:id", upload.single("photo"), async (req, res) => {
+  try {
+    let finalImageURL = "/uploads/" + req.file.filename;
+    console.log(req.params.id);
+    res.json({ status: "success", image: finalImageURL });
+    await pool.query(
+      `UPDATE thread SET image='${finalImageURL}'WHERE id='${req.params.id}' `
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//update forum list
+app.put("/thread/:id", async (req, res) => {
+  try {
+    const { updateNama, updateTelp } = req.body;
+    await pool.query(
+      `UPDATE thread SET judul_thread='${updateNama}',des_thread='${updateTelp}' WHERE id='${req.params.id}'`
+    );
+    res.json("berhasil update contact !");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//list comment
+app.get("/comment/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const thread_list = await pool.query(
+      `SELECT comment,jam_comment,user_comment FROM comment where id_post=${req.params.id}`
+    );
+    res.json(thread_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 //add comment
 app.post("/comment", async (req, res) => {
   try {
-    const { comment, name } = req.body;
+    const { comment, name, id_post } = req.body;
     const newCont = await pool.query(
-      `INSERT INTO comment (comment,user_comment,jam_comment) values ('${comment}','${name}','${Date()}') RETURNING *`
+      `INSERT INTO comment (comment,user_comment,jam_comment,id_post) values ('${comment}','${name}','${Date().replace(
+        " GMT+0700 (Western Indonesia Time)",
+        ""
+      )}','${id_post}') RETURNING *`
     );
     res.json(newCont.rows);
     // console.log(req.body);
