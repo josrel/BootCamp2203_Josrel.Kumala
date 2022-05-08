@@ -14,11 +14,13 @@ export default function ListThread({ list, id_thread,name }) {
             <blockquote className="blockquote mb-0">
               <p> {list.des_thread} </p>
               <footer className="blockquote-footer">
-                {list.jam} <cite title="Source Title">oleh {list.creator} </cite>
+                {list.jam} <cite title="Source Title">posted by {list.creator}</cite>
               </footer>
             </blockquote>
             <Card.Link>
+              {list.creator == name ? (
                 <DeleteThread list_thread={list} id_thread={id_thread} />
+              ): (" ")}
             </Card.Link>
           </Card.Body>
         </Card>

@@ -68,10 +68,12 @@ app.post("/forum", async (req, res) => {
   try {
     const { judul_forum, des_forum, name } = req.body;
     const newCont = await pool.query(
-      `INSERT INTO forum (judul_forum,des_forum,creator,jam) values ('${judul_forum}','${des_forum}','${name}','${Date().replace(
-        " GMT+0700 (Western Indonesia Time)",
-        ""
-      )}') RETURNING *`
+      `INSERT INTO forum (judul_forum,des_forum,creator,jam) 
+      values ('${judul_forum}',
+      '${des_forum}',
+      '${name}',
+      '${Date().replace(" GMT+0700 (Western Indonesia Time)","")}') 
+      RETURNING *`
     );
     res.json(newCont.rows);
     // console.log(req.body);
@@ -95,7 +97,10 @@ app.put("/forum/:id", async (req, res) => {
   try {
     const { updateNama, updateTelp } = req.body;
     await pool.query(
-      `UPDATE forum SET judul_forum='${updateNama}',des_forum='${updateTelp}' WHERE id='${req.params.id}'`
+      `UPDATE forum SET 
+      judul_forum='${updateNama}',
+      des_forum='${updateTelp}' 
+      WHERE id='${req.params.id}'`
     );
     res.json("berhasil update contact !");
   } catch (error) {
@@ -178,7 +183,10 @@ app.put("/thread/:id", async (req, res) => {
   try {
     const { updateNama, updateTelp } = req.body;
     await pool.query(
-      `UPDATE thread SET judul_thread='${updateNama}',des_thread='${updateTelp}' WHERE id='${req.params.id}'`
+      `UPDATE thread SET 
+      judul_thread='${updateNama}',
+      des_thread='${updateTelp}' 
+      WHERE id='${req.params.id}'`
     );
     res.json("berhasil update contact !");
   } catch (error) {
@@ -191,7 +199,10 @@ app.get("/comment/:id", async (req, res) => {
   try {
     console.log(req.params.id);
     const thread_list = await pool.query(
-      `SELECT comment,jam_comment,user_comment FROM comment where id_post=${req.params.id}`
+      `SELECT comment,
+      jam_comment,
+      user_comment 
+      FROM comment where id_post=${req.params.id}`
     );
     res.json(thread_list.rows);
   } catch (error) {
@@ -204,10 +215,12 @@ app.post("/comment", async (req, res) => {
   try {
     const { comment, name, id_post } = req.body;
     const newCont = await pool.query(
-      `INSERT INTO comment (comment,user_comment,jam_comment,id_post) values ('${comment}','${name}','${Date().replace(
-        " GMT+0700 (Western Indonesia Time)",
-        ""
-      )}','${id_post}') RETURNING *`
+      `INSERT INTO comment 
+      (comment,user_comment,jam_comment,id_post) 
+      values ('${comment}',
+      '${name}',
+      '${Date().replace(" GMT+0700 (Western Indonesia Time)","")}','${id_post}') 
+      RETURNING *`
     );
     res.json(newCont.rows);
     // console.log(req.body);
@@ -221,7 +234,9 @@ app.put("/profile/:id", async (req, res) => {
   try {
     const { updateNama} = req.body;
     await pool.query(
-      `UPDATE users SET user_name='${updateNama}'WHERE user_name='${req.params.id}'`
+      `UPDATE users SET 
+      user_name='${updateNama}'
+      WHERE user_name='${req.params.id}'`
     );
     res.json("berhasil update contact !");
   } catch (error) {
@@ -236,7 +251,9 @@ app.post("/profilepicture/:id", upload.single("photo"), async (req, res) => {
     console.log(req.params.id);
     res.json({ status: "success", image: finalImageURL });
     await pool.query(
-      `UPDATE users SET image='${finalImageURL}'WHERE user_name='${req.params.id}' `
+      `UPDATE users SET 
+      image='${finalImageURL}'
+      WHERE user_name='${req.params.id}' `
     );
   } catch (error) {
     console.error(error.message);

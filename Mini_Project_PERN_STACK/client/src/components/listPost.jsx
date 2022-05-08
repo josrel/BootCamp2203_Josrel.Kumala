@@ -4,7 +4,7 @@ import DeleteThread from "./admin/adminDeleteThread";
 import EditList from "./uploadPost";
 import EditPost from "./editPost";
 
-export default function ListPost({ list, id_thread }) {
+export default function ListPost({ list, id_thread, name }) {
   const AllList = list.map((list) => {
     return (
       <div>
@@ -30,6 +30,8 @@ export default function ListPost({ list, id_thread }) {
               )}
 
               <div className="button-admin">
+                {list.creator == name ? (
+                  <>
                 <Card.Link>
                   <DeleteThread list_thread={list} id_thread={id_thread} />
                 </Card.Link>
@@ -39,6 +41,8 @@ export default function ListPost({ list, id_thread }) {
                 <Card.Link>
                   <EditPost list_thread={list} id_thread={id_thread} />
                 </Card.Link>
+                  </>
+                ) : ("")}
               </div>
             </Card.Body>
           </Card>

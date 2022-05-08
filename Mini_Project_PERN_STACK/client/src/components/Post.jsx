@@ -59,7 +59,7 @@ const Post = (props) => {
   return (
     <React.Fragment>
         <Navigasi />
-        <ListPost list={list} />
+        <ListPost list={list} name={name}/>
         <Comment id_post={props.match.params.id}/>
     </React.Fragment>
   );
