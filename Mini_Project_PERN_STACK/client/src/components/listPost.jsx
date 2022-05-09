@@ -32,17 +32,19 @@ export default function ListPost({ list, id_thread, name }) {
               <div className="button-admin">
                 {list.creator == name ? (
                   <>
-                <Card.Link>
-                  <DeleteThread list_thread={list} id_thread={id_thread} />
-                </Card.Link>
-                <Card.Link>
-                  <EditList list_thread={list} id_thread={id_thread} />
-                </Card.Link>
-                <Card.Link>
-                  <EditPost list_thread={list} id_thread={id_thread} />
-                </Card.Link>
+                    <Card.Link>
+                      <DeleteThread list_thread={list} id_thread={id_thread} />
+                    </Card.Link>
+                    <Card.Link>
+                      <EditList list_thread={list} id_thread={id_thread} />
+                    </Card.Link>
+                    <Card.Link>
+                      <EditPost list_thread={list} id_thread={id_thread} />
+                    </Card.Link>
                   </>
-                ) : ("")}
+                ) : (
+                  ""
+                )}
               </div>
             </Card.Body>
           </Card>
