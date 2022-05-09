@@ -229,6 +229,33 @@ app.post("/comment", async (req, res) => {
   }
 });
 
+//delete comment
+app.delete("/comment/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    await pool.query(`DELETE FROM comment WHERE comment='${req.params.id}'`);
+    res.json("berhasil delete contact");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//update comment
+app.put("/comment/:id", async (req, res) => {
+  try {
+    const { updateNama } = req.body;
+    console.log(req.params.id)
+    await pool.query(
+      `UPDATE comment SET 
+      comment='${updateNama}'
+      WHERE comment='${req.params.id}'`
+    );
+    res.json("berhasil update contact !");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 //edit profile
 app.put("/profile/:id", async (req, res) => {
   try {

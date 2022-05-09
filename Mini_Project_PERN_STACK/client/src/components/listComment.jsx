@@ -4,8 +4,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import DeleteComment from "./deleteComment";
+import EditComment from "./editComment";
 
-const AddComment = ({ list_comment }) => {
+const AllComment = ({ list_comment, id_post, name }) => {
   const [show, setShow] = useState(false);
 
   const AllComment = list_comment.map((list) => {
@@ -15,12 +17,20 @@ const AddComment = ({ list_comment }) => {
           <Card>
             <Card.Body>
               <blockquote className="blockquote mb-0">
-                <p> {list.comment} </p>
+                <p> {list.comment}</p>
                 <footer className="blockquote-footer">
                   {list.jam_comment}{" "}
                   <cite title="Source Title">{list.user_comment}</cite>
                 </footer>
               </blockquote>
+              {list.user_comment == name ? (
+                <>
+                  <DeleteComment list_comment={list} id_post={id_post} />
+                  {/* <EditComment list_comment={list} id_post={id_post} /> */}
+                </>
+              ) : (
+                " "
+              )}
             </Card.Body>
           </Card>
         ) : null}
@@ -38,4 +48,4 @@ const AddComment = ({ list_comment }) => {
   );
 };
 
-export default AddComment;
+export default AllComment;

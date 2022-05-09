@@ -3,7 +3,7 @@ import AddComment from "./addComment";
 import ListComment from "./listComment";
 
 
-const Comment = ({id_post}) => {
+const Comment = ({id_post,name}) => {
   const [list, setList] = useState([]);
   // console.log(this.props.match.params.id)
 
@@ -26,7 +26,7 @@ const Comment = ({id_post}) => {
   return (
     <React.Fragment>
       <AddComment id_post={id_post}/>
-      <ListComment list_comment={list}/>
+      <ListComment list_comment={list} id_post={id_post} name={name}/>
 
     </React.Fragment>
   );

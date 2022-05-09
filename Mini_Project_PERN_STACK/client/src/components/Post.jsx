@@ -60,7 +60,7 @@ const Post = (props) => {
     <React.Fragment>
         <Navigasi />
         <ListPost list={list} name={name}/>
-        <Comment id_post={props.match.params.id}/>
+        <Comment id_post={props.match.params.id} name={name}/>
     </React.Fragment>
   );
 }

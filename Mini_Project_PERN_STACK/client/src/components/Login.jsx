@@ -52,8 +52,6 @@ const Login = ({ setAuth }) => {
     <Fragment>
       <ThemeProvider theme={theme} >
         <Container component="main" maxWidth="xs" style={{marginTop: "10"}} >
-          <Card>
-            <Card.Body>
               <CssBaseline />
               <Box
                 sx={{
@@ -115,8 +113,6 @@ const Login = ({ setAuth }) => {
                   </Grid>
                 </Box>
               </Box>
-            </Card.Body>
-          </Card>
         </Container>
       </ThemeProvider>
     </Fragment>
