@@ -69,6 +69,7 @@ const EditProfile = () => {
       const parseRes = await response.json();
 
       setName(parseRes.user_name);
+      setUpdateNama(parseRes.user_name)
       setUserImage(parseRes.image);
       setUpdateDepan(parseRes.first_name);
       setUpdateBelakang(parseRes.last_name);
