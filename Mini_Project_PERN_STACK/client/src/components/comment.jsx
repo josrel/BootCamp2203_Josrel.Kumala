@@ -26,7 +26,7 @@ const Comment = ({id_post,name}) => {
   return (
     <React.Fragment>
       <AddComment id_post={id_post}/>
-      <ListComment list_comment={list} id_post={id_post} name={name}/>
+      <ListComment list_comment={list} id_post={id_post} name={name} />
 
     </React.Fragment>
   );

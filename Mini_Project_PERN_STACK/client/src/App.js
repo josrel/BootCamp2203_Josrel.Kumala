@@ -10,6 +10,7 @@ import Thread from "./components/Thread";
 import Post from "./components/Post";
 import Comment from "./components/comment";
 import EditProfile from "./components/profileSetting";
+import UserSetting from "./components/userSetting";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -90,6 +91,7 @@ function App() {
             <Route path="/post/:id" component={Post}/>
             <Route path="/comment/:id" component={Comment}/>
             <Route path="/profile/:id" component={EditProfile}/>
+            <Route path="/usersetting" component={UserSetting}/>
           </Switch>
         </div>
       </BrowserRouter>

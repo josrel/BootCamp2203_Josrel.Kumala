@@ -6,9 +6,16 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const path = require("path");
+const morgan =  require('morgan')
+const fs = require("fs")
 
+
+const accessLogStream = fs.createWriteStream(__dirname + "/app.log",{flags:"a"})
 app.use(express.json()); //ambil data dari req.body
 app.use(cors());
+app.use(morgan('combined',{
+  stream : accessLogStream,
+}))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join("", "public")));
@@ -295,6 +302,18 @@ app.get("/users/:id", async (req, res) => {
       `SELECT * FROM users where user_name='${req.params.id}'`
     );
     res.json(thread_list.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+//user setting list
+app.get("/usersetting", async (req, res) => {
+  try {
+    const forum_list = await pool.query(`
+    SELECT * FROM users
+    `);
+    res.json(forum_list.rows);
   } catch (error) {
     console.error(error.message);
   }

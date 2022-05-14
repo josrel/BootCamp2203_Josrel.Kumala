@@ -76,6 +76,9 @@ const Navigasi = ({ setAuth }) => {
                 <NavDropdown.Item href={"profile/" + name}>
                   Profile Setting
                 </NavDropdown.Item>
+                <NavDropdown.Item href={"usersetting"}>
+                  User Setting
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   <Nav.Link onClick={(e) => logout(e)}>Logout</Nav.Link>
