@@ -266,10 +266,14 @@ app.put("/comment/:id", async (req, res) => {
 //edit profile
 app.put("/profile/:id", async (req, res) => {
   try {
-    const { updateNama} = req.body;
+    const { updateNama,updateDepan,updateBelakang,updateNomor} = req.body;
+    console.log(req.params.id)
     await pool.query(
       `UPDATE users SET 
-      user_name='${updateNama}'
+      user_name='${updateNama}',
+      first_name='${updateDepan}',
+      last_name='${updateBelakang}',
+      phone='${updateNomor}'
       WHERE user_name='${req.params.id}'`
     );
     res.json("berhasil update contact !");

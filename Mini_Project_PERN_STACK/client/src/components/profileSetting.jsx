@@ -32,6 +32,9 @@ const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [userImage, setUserImage] = useState("");
   const [updateNama, setUpdateNama] = useState();
+  const [updateDepan, setUpdateDepan] = useState();
+  const [updateBelakang, setUpdateBelakang] = useState();
+  const [updateNomor, setUpdateNomor] = useState();
 
   const [showUpload, setShowUpload] = useState(false);
   const handleCloseUpload = () => setShowUpload(false);
@@ -41,7 +44,7 @@ const EditProfile = () => {
 
   const [list, setList] = useState([]);
 
-  const getForum = async () => {
+  const getUser = async () => {
     try {
       const response = await fetch(`http://localhost:3001/users/${name}`);
       const jsondata = await response.json();
@@ -53,7 +56,7 @@ const EditProfile = () => {
     }
   };
   useEffect(() => {
-    getForum();
+    getUser();
   }, []);
 
   async function getName() {
@@ -67,6 +70,9 @@ const EditProfile = () => {
 
       setName(parseRes.user_name);
       setUserImage(parseRes.image);
+      setUpdateDepan(parseRes.first_name);
+      setUpdateBelakang(parseRes.last_name);
+      setUpdateNomor(parseRes.phone)
       console.log(userImage);
     } catch (error) {
       console.log(error.message);
@@ -80,7 +86,7 @@ const EditProfile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const body = { updateNama };
+      const body = { updateNama,updateDepan,updateBelakang,updateNomor };
       const response = await fetch(`http://localhost:3001/profile/${name}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -194,22 +200,36 @@ const EditProfile = () => {
               <CardContent>
                 <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>User Name</Form.Label>
                     <Form.Control
                       type="text"
                       value={updateNama}
-                      placeholder={list.user_name}
                       onChange={(e) => setUpdateNama(e.target.value)}
                     />
                   </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={updateDepan}
+                      onChange={(e) => setUpdateDepan(e.target.value)}
+                    />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Re-Enter Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={updateBelakang}
+                      onChange={(e) => setUpdateBelakang(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={updateNomor}
+                      onChange={(e) => setUpdateNomor(e.target.value)}
+                    />
                   </Form.Group>
                   <Button
                     color="primary"
