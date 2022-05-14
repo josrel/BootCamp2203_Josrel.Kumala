@@ -199,10 +199,10 @@ app.get("/comment/:id", async (req, res) => {
   try {
     console.log(req.params.id);
     const thread_list = await pool.query(
-      `SELECT comment,
-      jam_comment,
-      user_comment 
-      FROM comment where id_post=${req.params.id}`
+      `SELECT comment.*, users.*
+      FROM comment join users
+      on users.user_name = comment.user_comment
+      where id_post=${req.params.id}`
     );
     res.json(thread_list.rows);
   } catch (error) {
@@ -292,7 +292,7 @@ app.get("/users/:id", async (req, res) => {
   try {
     console.log(req.params.id);
     const thread_list = await pool.query(
-      `SELECT * FROM users where user_name=${req.params.id}`
+      `SELECT * FROM users where user_name='${req.params.id}'`
     );
     res.json(thread_list.rows);
   } catch (error) {

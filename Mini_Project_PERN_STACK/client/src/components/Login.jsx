@@ -3,14 +3,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+// import Typography from "@mui/material/Typography";
+// import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Card from "react-bootstrap/Card";
+
+import { Link as RouterLink } from 'react-router-dom';
+// @mui
+import { styled } from '@mui/material/styles';
+import { Card, Link, Container, Typography } from '@mui/material';
 
 const Login = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -48,6 +52,47 @@ const Login = ({ setAuth }) => {
     }
   };
 
+  const RootStyle = styled('div')(({ theme }) => ({
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  }));
+
+  const HeaderStyle = styled('header')(({ theme }) => ({
+    top: 0,
+    zIndex: 9,
+    lineHeight: 0,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    padding: theme.spacing(3),
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('md')]: {
+      alignItems: 'flex-start',
+      padding: theme.spacing(7, 5, 0, 7),
+    },
+  }));
+
+  const SectionStyle = styled(Card)(({ theme }) => ({
+    width: '100%',
+    maxWidth: 464,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    margin: theme.spacing(2, 0, 2, 2),
+  }));
+
+  const ContentStyle = styled('div')(({ theme }) => ({
+    maxWidth: 480,
+    margin: 'auto',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: theme.spacing(12, 0),
+  }));
+
   return (
     <Fragment>
       <ThemeProvider theme={theme} >
@@ -83,7 +128,6 @@ const Login = ({ setAuth }) => {
                     name="email"
                     value={email}
                     onChange={(e) => handleChange(e)}
-                    autoFocus
                   />
                   <TextField
                     margin="normal"

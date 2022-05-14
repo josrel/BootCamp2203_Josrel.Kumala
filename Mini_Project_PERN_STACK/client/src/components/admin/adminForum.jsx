@@ -19,7 +19,13 @@ export default function Forum({ forum, name }) {
       <React.Fragment>
         {/* <h2>{"../../../../server/public" + list.image}</h2> */}
         <Card>
-          <Card.Img variant="top" src={"http://localhost:3001/" + list.image} />
+        {list.image && (
+                <Card.Img
+                  variant="bottom"
+                  src={"http://localhost:3001/" + list.image}
+                />
+              )}
+          {/* <Card.Img variant="top" src={"http://localhost:3001/" + list.image} /> */}
           <Card.Body>
             <Card.Header>
               <h2 onClick={() => (window.location = `/thread/${list.id}`)}>

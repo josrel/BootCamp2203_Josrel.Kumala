@@ -13,7 +13,7 @@ export default function Forum({ list_forum, name }) {
     return (
       <React.Fragment>
         <Card>
-          <Card.Img variant="top" src={"http://localhost:3001/" + list.image} />
+          <Card.Img variant="top" style={{height:400}} src={"http://localhost:3001/" + list.image} />
           <Card.Body>
             <Card.Header>
               <h2 onClick={() => (window.location = `/thread/${list.id}`)}>
@@ -31,6 +31,7 @@ export default function Forum({ list_forum, name }) {
             </Card.Body>
           </Card.Body>
         </Card>
+        <br />
       </React.Fragment>
     );
   });

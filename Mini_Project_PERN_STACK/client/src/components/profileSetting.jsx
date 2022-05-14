@@ -3,6 +3,22 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import Navigasi from "./Nav";
 import Modal from "react-bootstrap/Modal";
+import {
+  Box,
+  // Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Grid,
+  TextField,
+} from "@mui/material";
+
+import {
+  Avatar,
+  CardActions,
+  Typography
+} from '@mui/material';
 
 const EditProfile = () => {
   const [name, setName] = useState("");
@@ -13,6 +29,24 @@ const EditProfile = () => {
   const handleShowUpload = () => setShowUpload(true);
   const [image, setImage] = useState("https://fakeimg.pl/350x250/");
   const [saveImage, setSaveImage] = useState(null);
+
+
+  const [list, setList] = useState([]);
+
+  const getForum = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/${name}`);
+      const jsondata = await response.json();
+      console.log(jsondata)
+      setList(jsondata);
+      console.log(list)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getForum();
+  }, []);
 
   async function getName() {
     try {
@@ -32,6 +66,14 @@ const EditProfile = () => {
   useEffect(() => {
     getName();
   }, []);
+  const user = {
+    avatar: '/static/images/avatars/avatar_6.png',
+    city: 'Los Angeles',
+    country: 'USA',
+    jobTitle: 'Senior Developer',
+    name: 'Katarina Smith',
+    timezone: 'GTM-7'
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -57,18 +99,21 @@ const EditProfile = () => {
     setSaveImage(uploaded);
   }
 
-  const uploadImage = async e => {
-    e.preventDefault()
+  const uploadImage = async (e) => {
+    e.preventDefault();
     try {
       if (!saveImage) {
         alert("upload gambar dulu");
       } else {
         let formData = new FormData();
         formData.append("photo", saveImage);
-        const response = await fetch(`http://localhost:3001/profilepicture/${name}`, {
-          method: "POST",
-          body: formData,
-        })
+        const response = await fetch(
+          `http://localhost:3001/profilepicture/${name}`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.status === "success") {
@@ -90,6 +135,7 @@ const EditProfile = () => {
           <Form.Control
             type="text"
             value={updateNama}
+            placeholder={list.user_name}
             onChange={(e) => setUpdateNama(e.target.value)}
           />
         </Form.Group>

@@ -6,10 +6,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Forum from "./Forum";
 import AdminForum from "./admin/adminForum";
 import AddForum from "./AddForum";
+import gambar from "./image/user.png";
 
 const Navigasi = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
 
   async function getName() {
     try {
@@ -20,6 +22,7 @@ const Navigasi = ({ setAuth }) => {
 
       const parseRes = await response.json();
       setName(parseRes.user_name);
+      setImage(parseRes.image);
     } catch (error) {
       console.log(error.message);
     }
@@ -51,7 +54,18 @@ const Navigasi = ({ setAuth }) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <Nav.Link>Hello {name} !</Nav.Link>
+              <Nav.Link>Hello {name}</Nav.Link>
+              {!image ? (
+                <img
+                  style={{ height: "35px", width: "35px", borderRadius: "50%" }}
+                  src={gambar}
+                />
+              ) : (
+              <img
+                style={{ height: "35px", width: "35px", borderRadius: "50%" }}
+                src={"http://localhost:3001/" + image}
+              />
+              )}
             </Nav>
             <Nav>
               <NavDropdown

@@ -9,6 +9,7 @@ import Navigasi from "./Nav"
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
 
   const logout = (e) => {
     e.preventDefault();
@@ -27,6 +28,8 @@ const Dashboard = ({ setAuth }) => {
       const parseRes = await response.json();
 
       setName(parseRes.user_name);
+      setRole(parseRes.role)
+      console.log(role)
     } catch (error) {
       console.log(error.message);
     }
@@ -42,7 +45,6 @@ const Dashboard = ({ setAuth }) => {
     try {
       const response = await fetch("http://localhost:3001/forum");
       const jsondata = await response.json();
-      console.log(jsondata)
       setList(jsondata);
     } catch (error) {
       console.log(error.message);
@@ -54,9 +56,9 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Navigasi setAuth={setAuth} />
+      <Navigasi setAuth={setAuth}/>
       <h1>Forum List</h1>
-      {name == "admin" ? (
+      {role == "superadmin" ? (
         <AdminForum forum={list} name={name} />
       ) : (
         <Forum list_forum={list} name={name}/>
