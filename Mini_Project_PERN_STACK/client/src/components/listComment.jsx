@@ -7,6 +7,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import DeleteComment from "./deleteComment";
 import EditComment from "./editComment";
 import gambar from "./image/user.png";
+import {FaGithubAlt} from "react-icons/fa"
+import {FaFortAwesome} from "react-icons/fa"
 
 const AllComment = ({ list_comment, id_post, name }) => {
   const [show, setShow] = useState(true);
@@ -30,14 +32,15 @@ const AllComment = ({ list_comment, id_post, name }) => {
               />
               )}
               {" "}
-              {list.user_name}
+              {list.user_name}{" "}
+              {list.role === "admin" ?  <FaGithubAlt /> : list.role === "superadmin" ?<FaFortAwesome /> : " "}
             </Card.Header>
             <Card.Body>
               <blockquote className="blockquote mb-0">
                 <p> {list.comment} </p>
                 <footer className="blockquote-footer">{list.jam_comment}</footer>
               </blockquote>
-              {list.user_comment == name || list.role !== "" ? (
+              {list.user_comment == name || list.role !== "user" ? (
                 <>
                   <DeleteComment list_comment={list} id_post={id_post} />
                   {/* <EditComment list_comment={list} id_post={id_post} /> */}

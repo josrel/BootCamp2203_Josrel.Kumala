@@ -7,6 +7,10 @@ import Table from "react-bootstrap/Table";
 import gambar from "./image/user.png";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import EditUser from "./userEdit";
+import {FaGithubAlt} from "react-icons/fa"
+import {FaFortAwesome} from "react-icons/fa"
+import DeleteUser from "./deleteUser";
 
 const UserSetting = () => {
   const [user, setUser] = useState([]);
@@ -24,23 +28,6 @@ const UserSetting = () => {
   useEffect(() => {
     getUserData();
   }, []);
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      console.log(role);
-      const body = { updateRole};
-      const response = await fetch(`http://localhost:3001/thread`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      console.log(response);
-    } catch (error) {
-      console.error(error.massage);
-    }
-  };
-  
 
   return (
     <Fragment>
@@ -80,32 +67,14 @@ const UserSetting = () => {
                   />
                 )}{" "}
                 {list.user_name}
+                {" "}
+                {list.role === "admin" ?  <FaGithubAlt /> : list.role === "superadmin" ?<FaFortAwesome /> : " "}
               </td>
               <td>{list.user_email}</td>
               <td>{list.role}</td>
-              <td>
-                {list.role === "superadmin" ? (
-                  ""
-                ) : (
-                //   <Dropdown>
-                //     <Dropdown.Toggle
-                //       variant="success"
-                //       id="dropdown-basic"
-                //     ></Dropdown.Toggle>
-                //     <Dropdown.Menu>
-                //       <Dropdown.Item href={"#/action-2" + list.user_name}>
-                //         user
-                //       </Dropdown.Item>
-                //       <Dropdown.Item href={"#/action-1" + list.user_name} >
-                //         admin
-                //       </Dropdown.Item>
-                //     </Dropdown.Menu>
-                //   </Dropdown>
-                <select value={role} onChange={e=>setRole(e.value)}>
-                    <option value="">admin</option>
-                    <option value="">user</option>
-                </select>
-                )}
+              <td style={{display: "flex"}}>
+                {list.role === "superadmin" ? "" : <EditUser user={list} />}
+                {list.role === "superadmin" ? "" : <DeleteUser user={list} />}
               </td>
             </tr>
           </tbody>

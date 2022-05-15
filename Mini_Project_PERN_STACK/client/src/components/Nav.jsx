@@ -7,11 +7,14 @@ import Forum from "./Forum";
 import AdminForum from "./admin/adminForum";
 import AddForum from "./AddForum";
 import gambar from "./image/user.png";
+import { FaFortAwesome } from "react-icons/fa";
+import { FaGithubAlt } from "react-icons/fa";
 
 const Navigasi = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
+  const [role, setRole] = useState("");
 
   async function getName() {
     try {
@@ -19,10 +22,10 @@ const Navigasi = ({ setAuth }) => {
         method: "GET",
         headers: { token: localStorage.token },
       });
-
       const parseRes = await response.json();
       setName(parseRes.user_name);
       setImage(parseRes.image);
+      setRole(parseRes.role);
     } catch (error) {
       console.log(error.message);
     }
@@ -55,16 +58,25 @@ const Navigasi = ({ setAuth }) => {
             <Nav className="me-auto"></Nav>
             <Nav>
               <Nav.Link>Hello {name}</Nav.Link>
+                <Nav.Link>
+                  {role === "admin" ? (
+                    <FaGithubAlt />
+                  ) : role === "superadmin" ? (
+                    <FaFortAwesome />
+                  ) : (
+                    " "
+                  )}
+                </Nav.Link>
               {!image ? (
                 <img
                   style={{ height: "35px", width: "35px", borderRadius: "50%" }}
                   src={gambar}
                 />
               ) : (
-              <img
-                style={{ height: "35px", width: "35px", borderRadius: "50%" }}
-                src={"http://localhost:3001/" + image}
-              />
+                <img
+                  style={{ height: "35px", width: "35px", borderRadius: "50%" }}
+                  src={"http://localhost:3001/" + image}
+                />
               )}
             </Nav>
             <Nav>
@@ -76,9 +88,13 @@ const Navigasi = ({ setAuth }) => {
                 <NavDropdown.Item href={"profile/" + name}>
                   Profile Setting
                 </NavDropdown.Item>
+                {role === "admin" || role === "superadmin" ? (
                 <NavDropdown.Item href={"usersetting"}>
                   User Setting
                 </NavDropdown.Item>
+                  ): (
+                    " "
+                  )}
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   <Nav.Link onClick={(e) => logout(e)}>Logout</Nav.Link>

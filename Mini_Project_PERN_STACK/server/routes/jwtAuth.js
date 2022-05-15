@@ -26,8 +26,8 @@ router.post("/register", validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
     //4 lalu setelah selesai hashing data akan dimasukan kedalam tabel user yang ada pada database
     const newUser = await pool.query(
-      "INSERT INTO users(user_name,user_email,user_password) VALUES ($1,$2,$3) RETURNING *",
-      [name, email, bcryptPassword]
+      "INSERT INTO users(user_name,user_email,user_password,role) VALUES ($1,$2,$3,$4) RETURNING *",
+      [name, email, bcryptPassword,"user"]
     );
 
     //5 lalu tahan selanjutnya user akan masuk ke dashboard sama seperti login dan mendapatkan

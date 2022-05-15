@@ -323,7 +323,35 @@ app.get("/usersetting", async (req, res) => {
   }
 });
 
+//user edit role sama nama
+app.put("/usersetting/:id", async (req, res) => {
+  try {
+    const { updateNama,updateRole} = req.body;
+    console.log(req.params.id)
+    await pool.query(
+      `UPDATE users SET 
+      user_name='${updateNama}',
+      role='${updateRole}'
+      WHERE user_id='${req.params.id}'`
+    );
+    res.json("berhasil update contact !");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
+
+//delete user
+app.delete("/usersetting/:id", async (req, res) => {
+  try {
+    console.log("halo")
+    console.log(req.params.id);
+    await pool.query(`DELETE FROM users WHERE user_id='${req.params.id}'`);
+    res.json("berhasil delete contact");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 
 app.listen(port, () => {

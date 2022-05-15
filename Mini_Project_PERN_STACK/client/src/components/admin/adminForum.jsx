@@ -22,6 +22,7 @@ export default function Forum({ forum, name }) {
         {list.image && (
                 <Card.Img
                   variant="bottom"
+                  style={{height:400}}
                   src={"http://localhost:3001/" + list.image}
                 />
               )}
