@@ -1,35 +1,17 @@
 import React, { useState, useEffect, Fragment } from "react";
-// import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import Navigasi from "./Nav";
 import Modal from "react-bootstrap/Modal";
-// import * as React from 'react';
-// import { useEffect, useState } from 'react'
-// import Layout from '../../components/layout/layout'
-// import image from '../../assets/img/002.jpg'
-
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CommentIcon from "@mui/icons-material/Comment";
 import { Box } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import gambar from "./image/user.png";
 
 const EditProfile = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [userImage, setUserImage] = useState("");
   const [updateNama, setUpdateNama] = useState();
   const [updateDepan, setUpdateDepan] = useState();
@@ -116,7 +98,7 @@ const EditProfile = () => {
       } else {
         let formData = new FormData();
         formData.append("photo", saveImage);
-        const response = await fetch(
+        await fetch(
           `http://localhost:3001/profilepicture/${name}`,
           {
             method: "POST",

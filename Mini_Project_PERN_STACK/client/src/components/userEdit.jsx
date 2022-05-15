@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { FaGithub } from "react-icons/fa";
 import Badge from 'react-bootstrap/Badge'
-import { FaGithubAlt } from "react-icons/fa";
 
 const EditUser = ({ user }) => {
   const [show, setShow] = useState(false);

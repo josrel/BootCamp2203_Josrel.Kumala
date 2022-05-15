@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import DeleteThread from "./admin/adminDeleteThread";
 import EditList from "./uploadPost";
@@ -30,7 +30,7 @@ export default function ListPost({ list, id_thread, name }) {
               )}
 
               <div className="button-admin">
-                {list.creator == name ? (
+                {list.creator === name ? (
                   <>
                     <Card.Link>
                       <DeleteThread list_thread={list} id_thread={id_thread} />

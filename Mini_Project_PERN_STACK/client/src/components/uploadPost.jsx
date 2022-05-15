@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 
 const EditList = ({ list_thread }) => {
     const [showUpload, setShowUpload] = useState(false);
@@ -27,7 +26,7 @@ const EditList = ({ list_thread }) => {
           } else {
             let formData = new FormData();
             formData.append("photo", saveImage);
-            const response = await fetch(`http://localhost:3001/thread/${list_thread.id}`, {
+            await fetch(`http://localhost:3001/thread/${list_thread.id}`, {
               method: "POST",
               body: formData,
             })

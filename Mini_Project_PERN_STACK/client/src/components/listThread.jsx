@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import DeleteThread from "./admin/adminDeleteThread";
 
-export default function ListThread({ list, id_thread,name }) {
+export default function ListThread({ list, id_thread,name, role }) {
   const AllList = list.map((list) => {
     return (
       <div>
@@ -18,7 +18,7 @@ export default function ListThread({ list, id_thread,name }) {
               </footer>
             </blockquote>
             <Card.Link>
-              {list.creator == name ? (
+              {list.creator === name || role !=="user" ? (
                 <DeleteThread list_thread={list} id_thread={id_thread} />
               ): (" ")}
             </Card.Link>

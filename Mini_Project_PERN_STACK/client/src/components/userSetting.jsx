@@ -1,21 +1,14 @@
 import React, { useState, useEffect, Fragment } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Form from "react-bootstrap/Form";
 import Navigasi from "./Nav";
-import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
 import gambar from "./image/user.png";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import EditUser from "./userEdit";
-import {FaGithubAlt} from "react-icons/fa"
-import {FaFortAwesome} from "react-icons/fa"
+import { FaGithubAlt } from "react-icons/fa";
+import { FaFortAwesome } from "react-icons/fa";
 import DeleteUser from "./deleteUser";
 
 const UserSetting = () => {
   const [user, setUser] = useState([]);
-  const [role, setRole] = useState();
-  const [updateRole, setUpdateRole] = useState();
   const getUserData = async () => {
     try {
       const response = await fetch("http://localhost:3001/usersetting");
@@ -49,6 +42,7 @@ const UserSetting = () => {
               <td>
                 {!list.image ? (
                   <img
+                    alt=""
                     style={{
                       height: "35px",
                       width: "35px",
@@ -58,6 +52,7 @@ const UserSetting = () => {
                   />
                 ) : (
                   <img
+                    alt=""
                     style={{
                       height: "35px",
                       width: "35px",
@@ -66,13 +61,18 @@ const UserSetting = () => {
                     src={"http://localhost:3001/" + list.image}
                   />
                 )}{" "}
-                {list.user_name}
-                {" "}
-                {list.role === "admin" ?  <FaGithubAlt /> : list.role === "superadmin" ?<FaFortAwesome /> : " "}
+                {list.user_name}{" "}
+                {list.role === "admin" ? (
+                  <FaGithubAlt />
+                ) : list.role === "superadmin" ? (
+                  <FaFortAwesome />
+                ) : (
+                  " "
+                )}
               </td>
               <td>{list.user_email}</td>
               <td>{list.role}</td>
-              <td style={{display: "flex"}}>
+              <td style={{ display: "flex" }}>
                 {list.role === "superadmin" ? "" : <EditUser user={list} />}
                 {list.role === "superadmin" ? "" : <DeleteUser user={list} />}
               </td>

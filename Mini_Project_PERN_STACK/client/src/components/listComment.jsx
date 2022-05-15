@@ -1,16 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState,Fragment } from "react";
 import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import DeleteComment from "./deleteComment";
-import EditComment from "./editComment";
 import gambar from "./image/user.png";
 import {FaGithubAlt} from "react-icons/fa"
 import {FaFortAwesome} from "react-icons/fa"
 
-const AllComment = ({ list_comment, id_post, name }) => {
+const AllComment = ({ list_comment, id_post, name, role }) => {
   const [show, setShow] = useState(true);
   // const [image, setImage] = useState("https://fakeimg.pl/350x250/");
 
@@ -22,11 +19,13 @@ const AllComment = ({ list_comment, id_post, name }) => {
             <Card.Header>
             {!list.image ? (
                 <img
+                alt=""
                   style={{ height: "35px", width: "35px", borderRadius: "50%" }}
                   src={gambar}
                 />
               ) : (
               <img
+              alt=""
                 style={{ height: "35px", width: "35px", borderRadius: "50%" }}
                 src={"http://localhost:3001/" + list.image}
               />
@@ -40,7 +39,7 @@ const AllComment = ({ list_comment, id_post, name }) => {
                 <p> {list.comment} </p>
                 <footer className="blockquote-footer">{list.jam_comment}</footer>
               </blockquote>
-              {list.user_comment == name || list.role !== "user" ? (
+              {list.user_comment === name || role !== "user" ? (
                 <>
                   <DeleteComment list_comment={list} id_post={id_post} />
                   {/* <EditComment list_comment={list} id_post={id_post} /> */}

@@ -1,22 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Forum from "./Forum";
 import AdminForum from "./admin/adminForum";
-import AddForum from "./AddForum";
 import Navigasi from "./Nav"
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
-
-  const logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    setAuth(false);
-    window.location.assign("/login");
-  };
 
   async function getName() {
     try {
@@ -58,7 +47,7 @@ const Dashboard = ({ setAuth }) => {
     <Fragment>
       <Navigasi setAuth={setAuth}/>
       <h1>Forum List</h1>
-      {role == "superadmin" ? (
+      {role !== "user" ? (
         <AdminForum forum={list} name={name} />
       ) : (
         <Forum list_forum={list} name={name}/>

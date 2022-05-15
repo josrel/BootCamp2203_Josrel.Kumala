@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
-import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import Thread from "./Thread";
-import Comment from "./comment";
 
 export default function Forum({ list_forum, name }) {
   const AllForum = list_forum.map((list) => {

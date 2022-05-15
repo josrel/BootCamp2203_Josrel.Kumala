@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ListThread from "./listThread";
-import Button from "react-bootstrap/Button";
-import Dashboard from "./Dashboard";
 import Navigasi from "./Nav";
 import AddThread from "../components/AddThread"
 
@@ -9,6 +7,7 @@ const Thread = (props) => {
   const [list, setList] = useState([]);
 
   const [name, setName] = useState("");
+  const [role, setRole] = useState("")
   async function getName() {
     try {
       const response = await fetch("http://localhost:3001/dashboard/", {
@@ -19,6 +18,7 @@ const Thread = (props) => {
       const parseRes = await response.json();
 
       setName(parseRes.user_name);
+      setRole(parseRes.role)
     } catch (error) {
       console.log(error.message);
     }
@@ -48,7 +48,7 @@ const Thread = (props) => {
     <React.Fragment>
       <Navigasi />
       <AddThread name={name} id={props.match.params.id}/>
-      <ListThread list={list} id_thread={props.match.params.id} name={name}/>
+      <ListThread list={list} id_thread={props.match.params.id} name={name} role={role}/>
     </React.Fragment>
   );
 }

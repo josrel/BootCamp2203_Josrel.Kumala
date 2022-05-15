@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import AdminEdit from "./adminEditForum";
 import AdminUpload from "./adminUploadForum";
-import Badge from "react-bootstrap/Badge";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Comment from "../comment";
-import Modal from "react-bootstrap/Modal";
 import AdminDelete from "./adminDeleteForum";
-import Thread from "../Thread";
 import AddForum from "../AddForum";
 
 export default function Forum({ forum, name }) {

@@ -3,16 +3,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Forum from "./Forum";
-import AdminForum from "./admin/adminForum";
-import AddForum from "./AddForum";
 import gambar from "./image/user.png";
 import { FaFortAwesome } from "react-icons/fa";
 import { FaGithubAlt } from "react-icons/fa";
 
 const Navigasi = ({ setAuth }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
   const [role, setRole] = useState("");
 
@@ -69,11 +65,13 @@ const Navigasi = ({ setAuth }) => {
                 </Nav.Link>
               {!image ? (
                 <img
+                alt=""
                   style={{ height: "35px", width: "35px", borderRadius: "50%" }}
                   src={gambar}
                 />
               ) : (
                 <img
+                alt=""
                   style={{ height: "35px", width: "35px", borderRadius: "50%" }}
                   src={"http://localhost:3001/" + image}
                 />
